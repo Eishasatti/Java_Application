@@ -7,6 +7,6 @@
  *
  * @author EISHA
  */
-public class Medical_Record {
+public class Doctor {
     
 }
