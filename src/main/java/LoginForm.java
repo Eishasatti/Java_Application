@@ -59,7 +59,7 @@ public class LoginForm extends javax.swing.JFrame {
         role.setForeground(new java.awt.Color(255, 255, 204));
         role.setText("Role");
         getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 191, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 100, 25));
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 140, 25));
 
         jPasswordField1.setToolTipText("");
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -67,18 +67,18 @@ public class LoginForm extends javax.swing.JFrame {
                 jPasswordField1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 100, 25));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 100, 25));
+        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 140, 25));
+        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 140, 25));
 
         register.setBackground(new java.awt.Color(255, 255, 204));
         register.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        register.setText("Register");
+        register.setText("Register Instead");
         register.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerActionPerformed(evt);
             }
         });
-        getContentPane().add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 250, 100, -1));
+        getContentPane().add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 140, -1));
 
         login.setBackground(new java.awt.Color(255, 255, 204));
         login.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -88,10 +88,10 @@ public class LoginForm extends javax.swing.JFrame {
                 loginActionPerformed(evt);
             }
         });
-        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 100, -1));
+        getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 140, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/back1.jpg"))); // NOI18N
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 410, 300));
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\EISHA\\Desktop\\and-healthcare\\and-healthcare\\back1.jpg")); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -106,6 +106,8 @@ public class LoginForm extends javax.swing.JFrame {
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new RegisterForm().setVisible(true);
         
     }//GEN-LAST:event_registerActionPerformed
 

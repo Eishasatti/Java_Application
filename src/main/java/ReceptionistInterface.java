@@ -53,6 +53,11 @@ public class ReceptionistInterface extends javax.swing.JFrame {
         ManDoc.setBackground(new java.awt.Color(255, 255, 204));
         ManDoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ManDoc.setText("Manage Doctors");
+        ManDoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ManDocActionPerformed(evt);
+            }
+        });
         getContentPane().add(ManDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 90, 190, 70));
 
         SchdApp.setBackground(new java.awt.Color(255, 255, 204));
@@ -75,7 +80,7 @@ public class ReceptionistInterface extends javax.swing.JFrame {
         });
         getContentPane().add(ManPat, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 200, 190, 70));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/hospice.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\EISHA\\Desktop\\hospice.jpg")); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 300));
 
         pack();
@@ -92,6 +97,12 @@ public class ReceptionistInterface extends javax.swing.JFrame {
     private void GenRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenRecActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_GenRecActionPerformed
+
+    private void ManDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManDocActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new Managedoctors().setVisible(true);
+    }//GEN-LAST:event_ManDocActionPerformed
 
     /**
      * @param args the command line arguments

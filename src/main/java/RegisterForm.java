@@ -25,21 +25,115 @@ public class RegisterForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLabel1 = new javax.swing.JLabel();
+        RegLogin = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        regemail = new javax.swing.JTextField();
+        role = new javax.swing.JTextField();
+        phoneno = new javax.swing.JTextField();
+        RegName = new javax.swing.JTextField();
+        regconfpass = new javax.swing.JPasswordField();
+        regpass = new javax.swing.JPasswordField();
+        register = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel1.setText("Registration");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
+
+        RegLogin.setBackground(new java.awt.Color(0, 102, 255));
+        RegLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        RegLogin.setText("Already have an account?");
+        RegLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        RegLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RegLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(RegLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, -1, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel2.setText("Phone no");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel3.setText("Role");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 190, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel4.setText("Password");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 280, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel5.setText("Confirm Password");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel8.setText("Name");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel9.setText("email");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 130, -1, -1));
+
+        regemail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                regemailActionPerformed(evt);
+            }
+        });
+        getContentPane().add(regemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 130, 25));
+        getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 130, 25));
+        getContentPane().add(phoneno, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 130, 25));
+        getContentPane().add(RegName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, 25));
+        getContentPane().add(regconfpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 130, 25));
+        getContentPane().add(regpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 130, 25));
+
+        register.setBackground(new java.awt.Color(255, 255, 204));
+        register.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        register.setText("Register");
+        register.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerActionPerformed(evt);
+            }
+        });
+        getContentPane().add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 130, 30));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\EISHA\\Desktop\\and-healthcare\\and-healthcare\\back2.jpg")); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 690, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void RegLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegLoginActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginForm().setVisible(true);
+        
+        
+    }//GEN-LAST:event_RegLoginActionPerformed
+
+    private void regemailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regemailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_regemailActionPerformed
+
+    private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_registerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -77,5 +171,21 @@ public class RegisterForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton RegLogin;
+    private javax.swing.JTextField RegName;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JTextField phoneno;
+    private javax.swing.JPasswordField regconfpass;
+    private javax.swing.JTextField regemail;
+    private javax.swing.JButton register;
+    private javax.swing.JPasswordField regpass;
+    private javax.swing.JTextField role;
     // End of variables declaration//GEN-END:variables
 }
