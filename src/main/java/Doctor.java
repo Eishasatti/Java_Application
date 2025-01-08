@@ -9,4 +9,7 @@
  */
 public class Doctor {
     
+    public void Add(){
+        
+    }
 }
