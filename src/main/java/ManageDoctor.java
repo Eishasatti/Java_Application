@@ -10,7 +10,7 @@
 public class ManageDoctor extends javax.swing.JFrame {
 
     /**
-     * Creates new form AddDoctor
+     * Creates new form ManageDoctor
      */
     public ManageDoctor() {
         initComponents();
@@ -25,265 +25,145 @@ public class ManageDoctor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        dname = new javax.swing.JTextField();
-        gender = new javax.swing.JTextField();
-        phone_no = new javax.swing.JTextField();
-        D_id = new javax.swing.JTextField();
-        room_no = new javax.swing.JTextField();
-        d_pass_word = new javax.swing.JPasswordField();
-        d_user_name = new javax.swing.JTextField();
-        spec = new javax.swing.JTextField();
-        Add_Doctor_db = new javax.swing.JButton();
-        Back_to_man = new javax.swing.JButton();
-        delDoc = new javax.swing.JButton();
-        searchDoc = new javax.swing.JButton();
-        UpdateDoc = new javax.swing.JButton();
+        doc_spec = new javax.swing.JTextField();
+        doc_name = new javax.swing.JTextField();
+        doc_age = new javax.swing.JTextField();
+        doc_gen = new javax.swing.JTextField();
+        doc_role = new javax.swing.JTextField();
+        doc_conf_pas = new javax.swing.JTextField();
+        doc_pass = new javax.swing.JTextField();
+        doc_phone = new javax.swing.JTextField();
+        doc_id = new javax.swing.JTextField();
+        doc_email = new javax.swing.JTextField();
+        Addbtn = new javax.swing.JButton();
+        delbtn = new javax.swing.JButton();
+        updatebtn = new javax.swing.JButton();
+        searchbtn = new javax.swing.JButton();
+        backbtn = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(102, 102, 255));
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 204));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 102, 102));
         jLabel1.setText("Manage Doctor");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 27, -1, -1));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel5.setText("Name");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Doctor Id:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 221, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Email:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 221, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Password:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 221, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Confirm Password:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 221, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel7.setText("Gender");
+        jLabel7.setText("Role:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 221, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel8.setText("Ph no");
+        jLabel8.setText("Phone #:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 117, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel9.setText("Specialization");
+        jLabel9.setText("Specialization:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 117, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel10.setText("D_id");
+        jLabel10.setText("Gender:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 117, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel11.setText("UserName");
+        jLabel11.setText("Name:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 117, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel12.setText("Password");
+        jLabel12.setText("Age:");
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 117, -1, -1));
+        getContentPane().add(doc_spec, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 143, 120, 35));
+        getContentPane().add(doc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 143, 120, 35));
+        getContentPane().add(doc_age, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 143, 120, 35));
+        getContentPane().add(doc_gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 143, 120, 35));
+        getContentPane().add(doc_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 247, 120, 35));
+        getContentPane().add(doc_conf_pas, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 247, 120, 35));
+        getContentPane().add(doc_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 247, 120, 35));
+        getContentPane().add(doc_phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 143, 120, 35));
+        getContentPane().add(doc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 247, 120, 35));
+        getContentPane().add(doc_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 247, 120, 35));
 
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 204));
-        jLabel13.setText("Room no");
+        Addbtn.setBackground(new java.awt.Color(255, 255, 204));
+        Addbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Addbtn.setText("ADD");
+        getContentPane().add(Addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 316, 100, 40));
 
-        dname.addActionListener(new java.awt.event.ActionListener() {
+        delbtn.setBackground(new java.awt.Color(255, 255, 204));
+        delbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        delbtn.setText("DELETE");
+        getContentPane().add(delbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 316, 100, 40));
+
+        updatebtn.setBackground(new java.awt.Color(255, 255, 204));
+        updatebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        updatebtn.setText("UPDATE");
+        getContentPane().add(updatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(359, 316, 100, 40));
+
+        searchbtn.setBackground(new java.awt.Color(255, 255, 204));
+        searchbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        searchbtn.setText("SEARCH");
+        getContentPane().add(searchbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 316, 100, 40));
+
+        backbtn.setBackground(new java.awt.Color(255, 51, 51));
+        backbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        backbtn.setText("<-");
+        backbtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                dnameActionPerformed(evt);
+                backbtnActionPerformed(evt);
             }
         });
+        getContentPane().add(backbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 6, -1, -1));
 
-        room_no.setToolTipText("");
-
-        d_user_name.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                d_user_nameActionPerformed(evt);
-            }
-        });
-
-        Add_Doctor_db.setBackground(new java.awt.Color(255, 255, 204));
-        Add_Doctor_db.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Add_Doctor_db.setText("Add");
-        Add_Doctor_db.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Add_Doctor_dbActionPerformed(evt);
-            }
-        });
-
-        Back_to_man.setBackground(new java.awt.Color(255, 0, 0));
-        Back_to_man.setText("<-");
-        Back_to_man.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Back_to_manActionPerformed(evt);
-            }
-        });
-
-        delDoc.setBackground(new java.awt.Color(255, 255, 204));
-        delDoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        delDoc.setText("Delete");
-        delDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delDocActionPerformed(evt);
-            }
-        });
-
-        searchDoc.setBackground(new java.awt.Color(255, 255, 204));
-        searchDoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        searchDoc.setText("Search");
-        searchDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchDocActionPerformed(evt);
-            }
-        });
-
-        UpdateDoc.setBackground(new java.awt.Color(255, 255, 204));
-        UpdateDoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        UpdateDoc.setText("Update");
-        UpdateDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                UpdateDocActionPerformed(evt);
-            }
-        });
+        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jLabel5)
-                        .addGap(146, 146, 146)
-                        .addComponent(jLabel7))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10)
-                            .addComponent(D_id, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Add_Doctor_db))
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(d_user_name, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11)
-                            .addComponent(delDoc))))
-                .addGap(76, 76, 76)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(phone_no, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12)
-                    .addComponent(d_pass_word, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchDoc))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 98, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spec, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addComponent(room_no, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel13))
-                    .addComponent(UpdateDoc))
-                .addGap(82, 82, 82))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Back_to_man)
-                .addGap(204, 204, 204)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGap(0, 930, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(Back_to_man)))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(dname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phone_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(spec, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
-                    .addComponent(jLabel13))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(D_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(d_user_name, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(d_pass_word, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(room_no, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Add_Doctor_db)
-                    .addComponent(delDoc)
-                    .addComponent(searchDoc)
-                    .addComponent(UpdateDoc))
-                .addContainerGap(188, Short.MAX_VALUE))
+            .addGap(0, 410, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 410));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void dnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dnameActionPerformed
+    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_dnameActionPerformed
-
-    private void Back_to_manActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Back_to_manActionPerformed
-               this.setVisible(false);
-               new ReceptionistInterface().setVisible(true);
-// TODO add your handling code here:
-    }//GEN-LAST:event_Back_to_manActionPerformed
-
-    private void Add_Doctor_dbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Add_Doctor_dbActionPerformed
-Doctor Doctor1=new Doctor();
-Doctor1.Add();
-// TODO add your handling code here:
-    }//GEN-LAST:event_Add_Doctor_dbActionPerformed
-
-    private void d_user_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_d_user_nameActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_d_user_nameActionPerformed
-
-    private void delDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delDocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_delDocActionPerformed
-
-    private void searchDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchDocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchDocActionPerformed
-
-    private void UpdateDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateDocActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_UpdateDocActionPerformed
+        this.setVisible(false);
+        new ReceptionistInterface().setVisible(true);
+    }//GEN-LAST:event_backbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,7 +191,6 @@ Doctor1.Add();
             java.util.logging.Logger.getLogger(ManageDoctor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -322,28 +201,32 @@ Doctor1.Add();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Add_Doctor_db;
-    private javax.swing.JButton Back_to_man;
-    private javax.swing.JTextField D_id;
-    private javax.swing.JButton UpdateDoc;
-    private javax.swing.JPasswordField d_pass_word;
-    private javax.swing.JTextField d_user_name;
-    private javax.swing.JButton delDoc;
-    private javax.swing.JTextField dname;
-    private javax.swing.JTextField gender;
+    private javax.swing.JButton Addbtn;
+    private javax.swing.JButton backbtn;
+    private javax.swing.JButton delbtn;
+    private javax.swing.JTextField doc_age;
+    private javax.swing.JTextField doc_conf_pas;
+    private javax.swing.JTextField doc_email;
+    private javax.swing.JTextField doc_gen;
+    private javax.swing.JTextField doc_id;
+    private javax.swing.JTextField doc_name;
+    private javax.swing.JTextField doc_pass;
+    private javax.swing.JTextField doc_phone;
+    private javax.swing.JTextField doc_role;
+    private javax.swing.JTextField doc_spec;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField phone_no;
-    private javax.swing.JTextField room_no;
-    private javax.swing.JButton searchDoc;
-    private javax.swing.JTextField spec;
+    private javax.swing.JButton searchbtn;
+    private javax.swing.JButton updatebtn;
     // End of variables declaration//GEN-END:variables
 }

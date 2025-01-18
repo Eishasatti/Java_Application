@@ -94,14 +94,21 @@ public class ReceptionistInterface extends javax.swing.JFrame {
 
     private void SchdAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchdAppActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new ScheduleApp().setVisible(false);
+        
     }//GEN-LAST:event_SchdAppActionPerformed
 
     private void ManPatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManPatActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new ManagePatient().setVisible(true);
     }//GEN-LAST:event_ManPatActionPerformed
 
     private void GenRecActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenRecActionPerformed
         // TODO add your handling code here:
+        this.setVisible(false);
+        new GenerateReceipt().setVisible(true);
     }//GEN-LAST:event_GenRecActionPerformed
 
     private void ManDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManDocActionPerformed

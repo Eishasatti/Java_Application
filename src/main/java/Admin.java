@@ -9,11 +9,11 @@
  */
 import java.sql.*;
 import javax.swing.JOptionPane;
-public class Receptionist {
+public class Admin {
     public void Login(String u_id, String password, String role) {
         Database_Connection dbcon = new Database_Connection();
         try {
-            String query = "SELECT * FROM receptionist WHERE receptionist_id = ? AND password = ? AND role = ?";
+            String query = "SELECT * FROM admin WHERE admin_id = ? AND password = ? AND role = ?";
             Connection con = dbcon.getConnection();
 
             try (PreparedStatement pstmt = con.prepareStatement(query)) {
@@ -21,17 +21,17 @@ public class Receptionist {
                 pstmt.setString(2, password);
                 pstmt.setString(3, role);
 
-                boolean receptionistExists = pstmt.executeQuery().next();
+                boolean adminExists = pstmt.executeQuery().next();
 
-                if (receptionistExists) {
-                    JOptionPane.showMessageDialog(null, "Receptionist login successful.", "Success", JOptionPane.INFORMATION_MESSAGE);
-                    new ReceptionistInterface().setVisible(true); // Redirect to Receptionist Dashboard
+                if (adminExists) {
+                    JOptionPane.showMessageDialog(null, "Admin login successful.", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    new AdminInterface().setVisible(true); // Redirect to Admin Dashboard
                 } else {
-                    JOptionPane.showMessageDialog(null, "Invalid Receptionist credentials.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Invalid Admin credentials.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: Unable to validate Receptionist login", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Error: Unable to validate Admin login", "Error", JOptionPane.ERROR_MESSAGE);
             ex.printStackTrace();
         } finally {
             dbcon.closeConnection();

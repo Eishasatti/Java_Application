@@ -9,6 +9,7 @@ public class Authentication {
     private long number;
     private String u_pass;
     private String role;
+    private long u_id;
 
     public Authentication() {
         u_name = " ";
@@ -17,8 +18,8 @@ public class Authentication {
         u_pass = " ";
     }
 
-  public void login(String u_n, String pass, String role) {
-    u_name = u_n;
+  public void login(long u_id, String pass, String role) {
+    this.u_id = u_id;
     u_pass = pass;
     this.role = role;
 

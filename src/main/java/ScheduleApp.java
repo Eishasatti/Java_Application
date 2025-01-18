@@ -63,6 +63,7 @@ public class ScheduleApp extends javax.swing.JFrame {
         pay_method = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         notes = new javax.swing.JTextArea();
+        backbtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -199,6 +200,16 @@ public class ScheduleApp extends javax.swing.JFrame {
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 760, 40));
 
+        backbtn.setBackground(new java.awt.Color(255, 51, 51));
+        backbtn.setFont(new java.awt.Font("Segoe UI", 3, 14)); // NOI18N
+        backbtn.setText("<-");
+        backbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(backbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1210, 540));
 
         pack();
@@ -219,6 +230,12 @@ public class ScheduleApp extends javax.swing.JFrame {
     private void process_paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_process_paymentActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_process_paymentActionPerformed
+
+    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
+        // TODO add your handling code here:
+         this.setVisible(false);
+        new ReceptionistInterface().setVisible(true);
+    }//GEN-LAST:event_backbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -259,6 +276,7 @@ public class ScheduleApp extends javax.swing.JFrame {
     private javax.swing.JTextField App_id;
     private javax.swing.JTextField amount;
     private com.toedter.calendar.JDateChooser appDate;
+    private javax.swing.JButton backbtn;
     private javax.swing.JTextField card_holder;
     private javax.swing.JTextField card_no;
     private javax.swing.JTextField cvv;
