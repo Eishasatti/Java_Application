@@ -7,6 +7,7 @@
  *
  * @author EISHA
  */
+import javax.swing.JOptionPane;
 public class RegisterForm extends javax.swing.JFrame {
 
     /**
@@ -50,7 +51,7 @@ public class RegisterForm extends javax.swing.JFrame {
         jLabel1.setText("Registration");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, -1, -1));
 
-        RegLogin.setBackground(new java.awt.Color(0, 102, 255));
+        RegLogin.setBackground(new java.awt.Color(204, 255, 204));
         RegLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         RegLogin.setText("Already have an account?");
         RegLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -59,7 +60,7 @@ public class RegisterForm extends javax.swing.JFrame {
                 RegLoginActionPerformed(evt);
             }
         });
-        getContentPane().add(RegLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, -1, 30));
+        getContentPane().add(RegLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 380, -1, 30));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 204));
@@ -96,12 +97,12 @@ public class RegisterForm extends javax.swing.JFrame {
                 regemailActionPerformed(evt);
             }
         });
-        getContentPane().add(regemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 130, 25));
-        getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 130, 25));
-        getContentPane().add(phoneno, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 130, 25));
-        getContentPane().add(RegName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, 25));
-        getContentPane().add(regconfpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 130, 25));
-        getContentPane().add(regpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 130, 25));
+        getContentPane().add(regemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 130, 130, 30));
+        getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 180, 130, 30));
+        getContentPane().add(phoneno, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 230, 130, 30));
+        getContentPane().add(RegName, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 80, 130, 30));
+        getContentPane().add(regconfpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 330, 130, 30));
+        getContentPane().add(regpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 280, 130, 30));
 
         register.setBackground(new java.awt.Color(255, 255, 204));
         register.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -114,7 +115,7 @@ public class RegisterForm extends javax.swing.JFrame {
         getContentPane().add(register, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 380, 130, 30));
 
         jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\EISHA\\Desktop\\and-healthcare\\and-healthcare\\back2.jpg")); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 690, 420));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 580, 440));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,6 +133,62 @@ public class RegisterForm extends javax.swing.JFrame {
     }//GEN-LAST:event_regemailActionPerformed
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
+              String name=RegName.getText();
+              String email=regemail.getText();
+           String reg_role=role.getText();
+         String phone_no = phoneno.getText();
+long phone = 0;
+     
+           String password = new String(regpass.getPassword());
+String confirm_password = new String(regconfpass.getPassword());
+              boolean isValid = true;
+
+// Check for empty fields
+if (name.isEmpty() || email.isEmpty() || reg_role.isEmpty() || phone_no.isEmpty() || password.isEmpty() || confirm_password.isEmpty()) {
+    isValid = false;
+    JOptionPane.showMessageDialog(null, "Please fill in all fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+}
+if (reg_role.equalsIgnoreCase("doctor") || 
+    reg_role.equalsIgnoreCase("admin") || 
+    reg_role.equalsIgnoreCase("receptionist")) {
+    isValid=true;
+}else{
+    JOptionPane.showMessageDialog(null, "Role must be Doctor,Admin or Receptionist", "Validation Error", JOptionPane.ERROR_MESSAGE);
+       
+    isValid=false;
+}
+ if (isValid) {
+    try {
+        phone = Long.parseLong(phone_no);
+        if (phone_no.length() != 11) {
+            isValid = false;
+            JOptionPane.showMessageDialog(null, "Phone number must be 10 digits.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+       
+        }
+    } catch (NumberFormatException e) {
+        isValid = false;
+        JOptionPane.showMessageDialog(null, "Phone number must contain only digits.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+    }
+}
+ // Validate email format (basic regex check)
+if (isValid && !email.matches("^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$")) {
+    isValid = false;
+    JOptionPane.showMessageDialog(null, "Invalid email format.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+}
+if (isValid && !password.equals(confirm_password)) {
+    isValid = false;
+    JOptionPane.showMessageDialog(null, "Password and confirm password do not match.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+}
+if (isValid) {
+    
+       Authentication registerNewUser=new Authentication();
+                registerNewUser.register(name, email, reg_role, phone, password);
+    
+} else {
+    JOptionPane.showMessageDialog(null, "Registration failed due to validation errors.", "Failure", JOptionPane.ERROR_MESSAGE);
+}
+        
+
         // TODO add your handling code here:
     }//GEN-LAST:event_registerActionPerformed
 

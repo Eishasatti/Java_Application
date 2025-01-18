@@ -7,6 +7,7 @@
  *
  * @author EISHA
  */
+import javax.swing.JOptionPane;
 public class LoginForm extends javax.swing.JFrame {
 
     /**
@@ -30,9 +31,9 @@ public class LoginForm extends javax.swing.JFrame {
         password = new javax.swing.JLabel();
         user_name = new javax.swing.JLabel();
         role = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jTextField2 = new javax.swing.JTextField();
+        login_user_name = new javax.swing.JTextField();
+        login_password = new javax.swing.JPasswordField();
+        login_role = new javax.swing.JTextField();
         register = new javax.swing.JButton();
         login = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -59,16 +60,16 @@ public class LoginForm extends javax.swing.JFrame {
         role.setForeground(new java.awt.Color(255, 255, 204));
         role.setText("Role");
         getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 191, -1, -1));
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 140, 25));
+        getContentPane().add(login_user_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 140, 30));
 
-        jPasswordField1.setToolTipText("");
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        login_password.setToolTipText("");
+        login_password.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                login_passwordActionPerformed(evt);
             }
         });
-        getContentPane().add(jPasswordField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 140, 25));
-        getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 140, 25));
+        getContentPane().add(login_password, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 140, 30));
+        getContentPane().add(login_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 190, 140, 30));
 
         register.setBackground(new java.awt.Color(255, 255, 204));
         register.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -96,12 +97,35 @@ public class LoginForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void login_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_passwordActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_login_passwordActionPerformed
 
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
+        String username=login_user_name.getText();
+         String password = new String(login_password.getPassword());
+         String role = login_role.getText().trim();
+         Boolean isValid=true;
+         
+         if (username.isEmpty() || role.isEmpty() || password.isEmpty()) {
+               isValid = false;
+                 JOptionPane.showMessageDialog(null, "Please fill in all fields.", "Validation Error", JOptionPane.ERROR_MESSAGE);
+}
+         if (!role.equalsIgnoreCase("doctor") && 
+               !role.equalsIgnoreCase("admin") && 
+              !role.equalsIgnoreCase("receptionist")) {
+             isValid=false;
+              JOptionPane.showMessageDialog(null, 
+        "Invalid role. Please enter 'doctor', 'admin', or 'receptionist'.", 
+        "Validation Error", 
+        JOptionPane.ERROR_MESSAGE);
+}
+         else{
+             Authentication logen=new Authentication();
+             logen.login(username, password,role);
+         }
+     
     }//GEN-LAST:event_loginActionPerformed
 
     private void registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerActionPerformed
@@ -149,10 +173,10 @@ public class LoginForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JButton login;
+    private javax.swing.JPasswordField login_password;
+    private javax.swing.JTextField login_role;
+    private javax.swing.JTextField login_user_name;
     private javax.swing.JLabel password;
     private javax.swing.JButton register;
     private javax.swing.JLabel role;
