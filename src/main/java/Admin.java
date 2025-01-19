@@ -10,6 +10,20 @@
 import java.sql.*;
 import javax.swing.JOptionPane;
 public class Admin {
+    
+    
+    public void Add(){
+        
+    }
+    public void Upadte(){
+        
+    }
+    public void Delete(){
+        
+    }
+    public void Search(){
+        
+    }
     public void Login(String u_id, String password, String role) {
         Database_Connection dbcon = new Database_Connection();
         try {

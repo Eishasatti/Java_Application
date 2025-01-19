@@ -27,11 +27,10 @@ public class ReceptionistInterface extends javax.swing.JFrame {
 
         jLabel2 = new javax.swing.JLabel();
         GenRec = new javax.swing.JButton();
-        ManDoc = new javax.swing.JButton();
-        SchdApp = new javax.swing.JButton();
         ManPat = new javax.swing.JButton();
         RecName = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        SchdApp = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -51,26 +50,6 @@ public class ReceptionistInterface extends javax.swing.JFrame {
         });
         getContentPane().add(GenRec, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 230, 190, 70));
 
-        ManDoc.setBackground(new java.awt.Color(255, 255, 204));
-        ManDoc.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        ManDoc.setText("Manage Doctors");
-        ManDoc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ManDocActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ManDoc, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 190, 70));
-
-        SchdApp.setBackground(new java.awt.Color(255, 255, 204));
-        SchdApp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        SchdApp.setText("Schedule Appointment");
-        SchdApp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SchdAppActionPerformed(evt);
-            }
-        });
-        getContentPane().add(SchdApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 130, 190, 70));
-
         ManPat.setBackground(new java.awt.Color(255, 255, 204));
         ManPat.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         ManPat.setText("Manage Patients");
@@ -87,6 +66,18 @@ public class ReceptionistInterface extends javax.swing.JFrame {
         getContentPane().add(RecName, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 26, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SchdApp.setBackground(new java.awt.Color(255, 255, 204));
+        SchdApp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SchdApp.setText("Schedule Appointment");
+        SchdApp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SchdAppActionPerformed(evt);
+            }
+        });
+        jPanel1.add(SchdApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 390, 70));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 340));
 
         pack();
@@ -95,7 +86,7 @@ public class ReceptionistInterface extends javax.swing.JFrame {
     private void SchdAppActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SchdAppActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ScheduleApp().setVisible(false);
+        new ScheduleApp().setVisible(true);
         
     }//GEN-LAST:event_SchdAppActionPerformed
 
@@ -110,12 +101,6 @@ public class ReceptionistInterface extends javax.swing.JFrame {
         this.setVisible(false);
         new GenerateReceipt().setVisible(true);
     }//GEN-LAST:event_GenRecActionPerformed
-
-    private void ManDocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManDocActionPerformed
-        // TODO add your handling code here:
-        this.setVisible(false);
-        new ManageDoctor().setVisible(true);
-    }//GEN-LAST:event_ManDocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,7 +139,6 @@ public class ReceptionistInterface extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GenRec;
-    private javax.swing.JButton ManDoc;
     private javax.swing.JButton ManPat;
     private javax.swing.JLabel RecName;
     private javax.swing.JButton SchdApp;

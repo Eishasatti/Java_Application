@@ -46,6 +46,7 @@ public class RegisterReceptionist extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         register = new javax.swing.JButton();
+        BACKbtn = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,12 +108,23 @@ public class RegisterReceptionist extends javax.swing.JFrame {
             }
         });
 
+        BACKbtn.setBackground(new java.awt.Color(255, 51, 51));
+        BACKbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BACKbtn.setText("<-");
+        BACKbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BACKbtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(147, 147, 147)
+                .addGap(15, 15, 15)
+                .addComponent(BACKbtn)
+                .addGap(57, 57, 57)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -153,7 +165,9 @@ public class RegisterReceptionist extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jLabel1)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(BACKbtn))
                 .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
@@ -272,6 +286,12 @@ if (isValid) {
         // TODO add your handling code here:
     }//GEN-LAST:event_registerActionPerformed
 
+    private void BACKbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BACKbtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new AdminInterface().setVisible(true);
+    }//GEN-LAST:event_BACKbtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -309,6 +329,7 @@ if (isValid) {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BACKbtn;
     private javax.swing.JTextField RegName;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
