@@ -24,6 +24,12 @@ import javax.swing.JOptionPane;
 
 public class GenerateReceipt extends javax.swing.JFrame {
 double bHeight=0.0;
+ String pat_id;
+  String App_id;
+   String Recp_id;
+    String Recpt_id;
+      int room_no;
+       String pay_status;
    
     /**
      * Creates new form GenerateReceipt
@@ -55,7 +61,8 @@ double bHeight=0.0;
         pay_sta = new javax.swing.JTextField();
         patient_id = new javax.swing.JTextField();
         room_doc = new javax.swing.JComboBox<>();
-        printbtn = new javax.swing.JButton();
+        generate_recp = new javax.swing.JButton();
+        peint_recep = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,12 +97,21 @@ double bHeight=0.0;
 
         room_doc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        printbtn.setBackground(new java.awt.Color(255, 255, 204));
-        printbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        printbtn.setText("Print Receipt");
-        printbtn.addActionListener(new java.awt.event.ActionListener() {
+        generate_recp.setBackground(new java.awt.Color(255, 255, 204));
+        generate_recp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        generate_recp.setText("Generate Receipt");
+        generate_recp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                printbtnActionPerformed(evt);
+                generate_recpActionPerformed(evt);
+            }
+        });
+
+        peint_recep.setBackground(new java.awt.Color(255, 255, 204));
+        peint_recep.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        peint_recep.setText("Print Receipt");
+        peint_recep.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                peint_recepActionPerformed(evt);
             }
         });
 
@@ -128,8 +144,10 @@ double bHeight=0.0;
                         .addGap(39, 39, 39)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(printbtn)))
+                        .addGap(138, 138, 138)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(generate_recp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(peint_recep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -144,8 +162,7 @@ double bHeight=0.0;
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(room_doc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(room_doc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -165,11 +182,12 @@ double bHeight=0.0;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(patient_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(recepsionist_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(72, 72, 72)
-                .addComponent(printbtn)
-                .addGap(18, 18, 18))
+                            .addComponent(recepsionist_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(generate_recp)
+                .addGap(18, 18, 18)
+                .addComponent(peint_recep)
+                .addContainerGap())
         );
 
         pack();
@@ -181,19 +199,33 @@ double bHeight=0.0;
         new ReceptionistInterface().setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
 
-    private void printbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printbtnActionPerformed
+    private void generate_recpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_recpActionPerformed
         // TODO add your handling code here:
-       String pat_id=patient_id.getText();
+       pat_id=patient_id.getText();
            
-    String App_id=appoi_id.getText();
-      String Recp_id=recep_id.getText();
-     String Recpt_id=recepsionist_id.getText();
-    int room_no = Integer.parseInt(room_doc.getSelectedItem().toString());
+     App_id=appoi_id.getText();
+       Recp_id=recep_id.getText();
+      Recpt_id=recepsionist_id.getText();
+     room_no = Integer.parseInt(room_doc.getSelectedItem().toString());
 
-     String pay_status=pay_sta.getText();
+      pay_status=pay_sta.getText();
      
         
-    }//GEN-LAST:event_printbtnActionPerformed
+    }//GEN-LAST:event_generate_recpActionPerformed
+
+    private void peint_recepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peint_recepActionPerformed
+        // TODO add your handling code here:
+                 bHeight = (double) App_id.length();
+                 JOptionPane.showMessageDialog(rootPane, bHeight);
+                 PrinterJob pj=PrinterJob.getPrinterJob();
+                 pj.setPrintable(new BillPrintable(),getPageFormat(pj));
+                 try{
+                     pj.print();
+                 }
+                 catch(PrinterException ex){
+                     ex.printStackTrace();
+                 }
+    }//GEN-LAST:event_peint_recepActionPerformed
 
     public PageFormat getPageFormat(PrinterJob pj){
         PageFormat pf=pj.defaultPage();
@@ -219,6 +251,95 @@ double bHeight=0.0;
     public static double toPPI(double inch){
         return inch*72d;
     }
+//    public PageFormat getPageFormat(PrinterJob pj) {
+//    PageFormat pf = pj.defaultPage();
+//    Paper paper = pf.getPaper();
+//
+//    // Define fixed dimensions for a medium-sized receipt
+//    double receiptWidth = cm_to_pp(8);  // Width of the receipt in cm (e.g., 8cm)
+//    double receiptHeight = cm_to_pp(20); // Height of the receipt in cm (e.g., 20cm)
+//
+//    paper.setSize(receiptWidth, receiptHeight);
+//    paper.setImageableArea(10, 10, receiptWidth - 20, receiptHeight - 20); // Margins
+//
+//    pf.setOrientation(PageFormat.PORTRAIT);
+//    pf.setPaper(paper);
+//    return pf;
+//}
+
+   public class BillPrintable implements Printable {
+
+    public int print(Graphics graphics, PageFormat pageFormat, int pageIndex)
+            throws PrinterException {
+
+        int result = NO_SUCH_PAGE;
+
+        if (pageIndex == 0) {
+            Graphics2D g2d = (Graphics2D) graphics;
+            g2d.translate((int) pageFormat.getImageableX(), (int) pageFormat.getImageableY());
+
+            // Header and Clinic Details
+            try {
+                int y = 20;
+                int yShift = 10;
+                int headerRectHeight = 15;
+
+                g2d.setFont(new Font("Monospaced", Font.PLAIN, 10));
+                g2d.drawImage(new ImageIcon("D:\\4semester\\final-sems-pro-SC\\src\\main\\java\\applogo.jpg").getImage(), 50, 20, 90, 30, rootPane);
+                y += yShift + 30;
+                g2d.drawString("--------------------------", 12, y);
+                y += yShift;
+                g2d.drawString("Clinic Management System", 12, y);
+                y += yShift;
+                g2d.drawString("Address: Rawalpindi, Pakistan", 12, y);
+                y += yShift;
+                g2d.drawString("Phone: +92300000000", 12, y);
+                y += yShift;
+                g2d.drawString("Email: contact:eishasajid316@gmail.com", 12, y);
+                y += yShift;
+                g2d.drawString("--------------------------", 12, y);
+                y += headerRectHeight;
+
+                // Display IDs in the Header
+                g2d.drawString("Patient ID: " + pat_id, 10, y);
+                y += yShift;
+                g2d.drawString("Appointment ID: " + App_id, 10, y);
+                y += yShift;
+                g2d.drawString("Receipt ID: " + Recpt_id, 10, y);
+                y += yShift;
+                g2d.drawString("Receptionist ID: " + Recp_id, 10, y);
+                y += yShift;
+                g2d.drawString("Doctor Room No: " + room_no, 10, y);
+                y += yShift;
+                g2d.drawString("Payment Status: " + pay_status, 10, y);
+                y += yShift;
+                g2d.drawString("--------------------------", 10, y);
+                y += headerRectHeight;
+
+                // Leave Body Empty for Doctor's Prescription
+                g2d.drawString("Prescription Area:", 10, y);
+                y += yShift + 10;
+                g2d.drawRect(10, y, 200, 100); // Empty space for the doctor to fill prescription manually
+                y += 110;
+
+                // Footer
+                g2d.drawString("--------------------------", 10, y);
+                y += yShift;
+                g2d.drawString("THANK YOU!", 10, y);
+                y += yShift;
+                g2d.drawString("Software by E & A", 10, y);
+                y += yShift;
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            result = PAGE_EXISTS;
+        }
+        return result;
+    }
+}
+
     /**
      * @param args the command line arguments
      */
@@ -257,6 +378,7 @@ double bHeight=0.0;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField appoi_id;
     private javax.swing.JButton backbtn;
+    private javax.swing.JButton generate_recp;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -266,7 +388,7 @@ double bHeight=0.0;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField patient_id;
     private javax.swing.JTextField pay_sta;
-    private javax.swing.JButton printbtn;
+    private javax.swing.JButton peint_recep;
     private javax.swing.JTextField recep_id;
     private javax.swing.JTextField recepsionist_id;
     private javax.swing.JComboBox<String> room_doc;
