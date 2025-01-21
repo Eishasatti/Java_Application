@@ -112,18 +112,16 @@ public class LoginForm extends javax.swing.JFrame {
         JOptionPane.ERROR_MESSAGE);
 }
          else{
-            if(role.toLowerCase()=="doctor"){
-                Doctor doct1=new Doctor();
-                doct1.Login(id,password,role);
-            }
-            else if(role.toLowerCase()=="admin"){
-                Admin admin1=new Admin();
-                admin1.Login(id, password, role);
-            }
-            else {
-                Receptionist recp1=new Receptionist();
-                recp1.Login(id, password, role);
-            }
+            if (role.equalsIgnoreCase("doctor")) {
+        Doctor doct1 = new Doctor();
+        doct1.Login(id, password, role);
+    } else if (role.equalsIgnoreCase("admin")) {
+        Admin admin1 = new Admin();
+        admin1.Login(id, password, role);
+    } else {
+        Receptionist recp1 = new Receptionist();
+        recp1.Login(id, password, role);
+    }
          }
      
     }//GEN-LAST:event_loginActionPerformed

@@ -239,6 +239,7 @@ public class ManagePatient extends javax.swing.JFrame {
         // Create a new Database_Connection instance
          Patient patient=new Patient();
     patient.DeletefromDb(id1);
+    clearFields();
     }else{
         JOptionPane.showMessageDialog(null, "Error: Unable to delete for patient.ID required");
             
@@ -259,6 +260,7 @@ public class ManagePatient extends javax.swing.JFrame {
         // Create a new Database_Connection instance
     Patient patient=new Patient();
     patient.Insert(id,gender, ph_no, name, age, emg_no);
+     clearFields();
    
       
         
@@ -273,6 +275,7 @@ public class ManagePatient extends javax.swing.JFrame {
         // Create a new Database_Connection instance
         Patient patient=new Patient();
     patient.UpdateInDb(id,gender, ph_no, name, age, emg_no);
+     clearFields();
     }//GEN-LAST:event_update_patientActionPerformed
     }
     private void search_patientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_patientActionPerformed

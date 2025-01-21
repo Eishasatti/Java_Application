@@ -2,7 +2,9 @@
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /*
@@ -64,7 +66,7 @@ public class Patient {
             dbConnection.closeConnection();
         }
     }
-    
+  /*
     public void SearchfromDb(String pat_id){
         id=pat_id;
          Database_Connection dbConnection = new Database_Connection();
@@ -111,7 +113,32 @@ public class Patient {
             dbConnection.closeConnection();
         }
     }
-    
+   */
+     public ArrayList<String> getPatientList() {
+        ArrayList<String> PatientDetails = new ArrayList<>();
+        Database_Connection DBcon=new Database_Connection();
+        Connection con =DBcon.getConnection();
+        try {
+            String query = "SELECT PatientId,Name FROM patient"; // Replace with your table and column name
+            PreparedStatement pstmt = con.prepareStatement(query);
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String patient1=rs.getString("PatientId")+":"+rs.getString("Name");
+                PatientDetails.add(patient1);
+            }
+        } catch (SQLException e) {
+        } finally {
+            try {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+            }
+        }
+        return PatientDetails;
+    }
+
     public void DeletefromDb(String pat_id){
         id=pat_id;
         Database_Connection dbConnection = new Database_Connection();

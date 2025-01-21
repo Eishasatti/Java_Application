@@ -11,14 +11,14 @@ import javax.swing.JOptionPane;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author EISHA
  */
 public class ManAdmin extends javax.swing.JFrame {
-               String name, gender, pass, conf_pass, email,role, add_id, ph_no;
-        long phone;
+
+    String name, gender, pass, conf_pass, email, role, add_id, ph_no;
+    long phone;
 
     /**
      * Creates new form ManAdmin
@@ -26,10 +26,9 @@ public class ManAdmin extends javax.swing.JFrame {
     public ManAdmin() {
         initComponents();
         note.setEditable(false);
-    
 
-             
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -193,259 +192,182 @@ public class ManAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+  
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
-         String add_id = admin_id.getText();
+        String add_id = admin_id.getText();
 
-    // Validate input
-    if (add_id.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "AdminId is required to search.");
-        return;
-    }
+        // Validate input
+        if (add_id.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "AdminId is required to search.");
 
-    // Establish database connection
-    Database_Connection dbConnection = new Database_Connection();
-    Connection con = dbConnection.getConnection();
-
-    // Search query
-    String searchQuery = "SELECT * FROM admin WHERE AdminId = ?";
-
-    try {
-        // Prepare the statement
-        PreparedStatement preparedStatement = con.prepareStatement(searchQuery);
-
-        // Set the AdminId value
-        preparedStatement.setString(1, add_id);
-
-        // Execute the query
-        ResultSet resultSet = preparedStatement.executeQuery();
-
-        // Check if a record was found
-        if (resultSet.next()) {
-            // Retrieve the admin data from the result set and display in the form
-            String adminId = resultSet.getString("AdminId");
-            String username = resultSet.getString("Name");
-            String phonenoad= resultSet.getString("Phoneno");
-            
-            String password= resultSet.getString("Password");
-            
-            String email_admin=resultSet.getString("Email")
-;
-            
-            // Set the form fields with the retrieved values
-            admin_id.setText(adminId);
-            admin_name.setText(username);
-            admin_num.setText(phonenoad);
-           add_email.setText(email_admin);
-           admin_pass.setText(password);
-            
-        } else {
-            JOptionPane.showMessageDialog(null, "No admin found with the given AdminId.");
         }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error occurred while searching for the admin record: " + e.getMessage());
-        e.printStackTrace();
-    } finally {
-        // Close the database connection
-        dbConnection.closeConnection();
-    }
+
+        // Establish database connection
+        Database_Connection dbConnection = new Database_Connection();
+        Connection con = dbConnection.getConnection();
+
+        // Search query
+        String searchQuery = "SELECT * FROM admin WHERE AdminId = ?";
+
+        try {
+            // Prepare the statement
+            PreparedStatement preparedStatement = con.prepareStatement(searchQuery);
+
+            // Set the AdminId value
+            preparedStatement.setString(1, add_id);
+
+            // Execute the query
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            // Check if a record was found
+            if (resultSet.next()) {
+                // Retrieve the admin data from the result set and display in the form
+                String adminId = resultSet.getString("AdminId");
+                String username = resultSet.getString("Name");
+                String phonenoad = resultSet.getString("Phoneno");
+
+                String password = resultSet.getString("Password");
+
+                String email_admin = resultSet.getString("Email");
+
+                // Set the form fields with the retrieved values
+                admin_id.setText(adminId);
+                admin_name.setText(username);
+                admin_num.setText(phonenoad);
+                add_email.setText(email_admin);
+                admin_pass.setText(password);
+
+            } else {
+                JOptionPane.showMessageDialog(null, "No admin found with the given AdminId.");
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Error occurred while searching for the admin record: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            // Close the database connection
+            dbConnection.closeConnection();
+        }
     }//GEN-LAST:event_btnSearchActionPerformed
 
-   public boolean ValidateInputAll( ) {
-    if (name.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Name cannot be empty.");
-        return false;
+    public boolean ValidateInputAll() {
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Name cannot be empty.");
+            return false;
+        }
+        if (gender.isEmpty() || !(gender.equalsIgnoreCase("M") || gender.equalsIgnoreCase("F"))) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid gender (M for Male,F for Female).");
+            return false;
+        }
+
+        if (String.valueOf(ph_no).length() != 10) {
+            JOptionPane.showMessageDialog(null, "Phone number must be 10 digits and numeric.");
+            return false;
+        }
+        if (email.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Email cannot be empty.");
+            return false;
+        }
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        if (!matcher.matches()) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid email address.");
+            return false;
+        }
+        if (add_id.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Admin ID cannot be empty.");
+            return false;
+        }
+        if (role.isEmpty() || !(role.equalsIgnoreCase("admin"))) {
+            JOptionPane.showMessageDialog(null, "Role must be either 'admin'.");
+            return false;
+        }
+        if (!pass.equals(conf_pass)) {
+            JOptionPane.showMessageDialog(null, "Passwords do not match.");
+            return false;
+        }
+        if (pass.isEmpty() || pass.length() < 6) {
+            JOptionPane.showMessageDialog(null, "Password must be at least 6 characters long.");
+            return false;
+        }
+
+        return true;
     }
-    if (gender.isEmpty() || !(gender.equalsIgnoreCase("M") || gender.equalsIgnoreCase("F"))) {
-        JOptionPane.showMessageDialog(null, "Please enter a valid gender (M for Male,F for Female).");
-        return false;
-    }
-    
-   if (String.valueOf(ph_no).length() != 10) {
-    JOptionPane.showMessageDialog(null, "Phone number must be 10 digits and numeric.");
-    return false;
-}
-    if (email.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Email cannot be empty.");
-        return false;
-    }
-    String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-    Pattern pattern = Pattern.compile(emailRegex);
-    Matcher matcher = pattern.matcher(email);
-    if (!matcher.matches()) {
-        JOptionPane.showMessageDialog(null, "Please enter a valid email address.");
-        return false;
-    }
-    if (add_id.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Admin ID cannot be empty.");
-        return false;
-    }
-    if (role.isEmpty() || !(role.equalsIgnoreCase("admin")) )
-    {
-        JOptionPane.showMessageDialog(null, "Role must be either 'admin'.");
-        return false;
-    }
-     if (!pass.equals(conf_pass)) {
-        JOptionPane.showMessageDialog(null, "Passwords do not match.");
-        return false;
-    }
-    if (pass.isEmpty() || pass.length() < 6) {
-        JOptionPane.showMessageDialog(null, "Password must be at least 6 characters long.");
-        return false;
-    }
-   
-    return true;
-}
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new AdminInterface().setVisible(true);
-        
+
     }//GEN-LAST:event_btnBackActionPerformed
 
-    public void getInputs(){
+    public void getInputs() {
+
+        name = admin_name.getText();
+        gender = ad_gen.getText();
+        conf_pass = new String(admin_conf_pass.getPassword());
+        role = ad_role.getText();
+        ph_no = admin_num.getText();
+        phone = Long.parseLong(ph_no);
+        email = add_email.getText();
+        add_id = admin_id.getText();
+        pass = new String(admin_pass.getPassword());
+    }
+  private void clearFields() {
+    admin_id.setText("");       // Clear the ID field
+  admin_pass.setText("");      // Clear the password field
+    ad_role.setText("");
+    admin_name.setText("");
     
-      name = admin_name.getText();
-             gender = ad_gen.getText();
-              conf_pass = new String(admin_conf_pass.getPassword());
-               role = ad_role.getText();
-             ph_no = admin_num.getText();
-             phone=Long.parseLong(ph_no);
-             email=add_email.getText();
-             add_id = admin_id.getText();
-            pass = new String(admin_pass.getPassword());
-       }
-    
+     ad_gen.setText("");
+     admin_conf_pass.setText("");
+     admin_num.setText("");
+     add_email.setText("");
+     
+
+// Clear the role field
+}
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
-       getInputs();
+        getInputs();
 
-         if (ValidateInputAll()) {
-        // Establish database connection
-        Database_Connection dbConnection = new Database_Connection();
-        Connection con = dbConnection.getConnection();
+        if (ValidateInputAll()) {
+            // Establish database connection
+            Admin ad1 = new Admin(add_id, name, gender, phone, role, email, pass);
 
-        // Insert query
-        String insertQuery = "INSERT INTO admin (AdminId, Name, Gender, Phoneno, Role,Email, Password) VALUES (?, ?, ?, ?, ?,?, ?)";
-
-        try {
-            // Prepare the statement
-            PreparedStatement preparedStatement = con.prepareStatement(insertQuery);
-            
-            // Set values dynamically
-            preparedStatement.setString(1, add_id);
-            preparedStatement.setString(2, name);
-            preparedStatement.setString(3, gender);
-            preparedStatement.setLong(4, phone); // Assuming phone is a numeric type in your database
-            preparedStatement.setString(5, role);
-            preparedStatement.setString(6, email);
-            preparedStatement.setString(7, pass);
-
-            // Execute the query
-            int rowsAffected = preparedStatement.executeUpdate();
-
-            // Check if insertion was successful
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Admin record added successfully.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to add admin record. Please try again.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error occurred while adding admin record: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Close the database connection
-            dbConnection.closeConnection();
+            ad1.Add();
+            clearFields();
         }
-    }
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        
-                   getInputs();
-    // Validate the input fields
-    if (ValidateInputAll()) {
-        // Establish database connection
-        Database_Connection dbConnection = new Database_Connection();
-        Connection con = dbConnection.getConnection();
 
-        // Update query
-        String updateQuery = "UPDATE admin SET Name = ?, Gender = ?, Phoneno = ?, Role = ?, Email = ?, Password = ? WHERE AdminId = ?";
-
-        try {
-            // Prepare the statement
-            PreparedStatement preparedStatement = con.prepareStatement(updateQuery);
-
-            // Set values dynamically
-            preparedStatement.setString(1, name);
-            preparedStatement.setString(2, gender);
-            preparedStatement.setLong(3, phone);
-            preparedStatement.setString(4, role);
-            preparedStatement.setString(5, email);
-            preparedStatement.setString(6, pass);
-            preparedStatement.setString(7, add_id);  // Using AdminId to update the record
-
-            // Execute the query
-            int rowsAffected = preparedStatement.executeUpdate();
-
-            // Check if update was successful
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Admin record updated successfully.");
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to update admin record. Please check the AdminId.");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error occurred while updating admin record: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Close the database connection
-            dbConnection.closeConnection();
+        getInputs();
+        // Validate the input fields
+        if (ValidateInputAll()) {
+            // Establish database connection
+            Admin ad2 = new Admin(add_id, name, gender, phone, role, email, pass);
+            ad2.Upadte();
+             clearFields();
         }
-    }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-          add_id = admin_id.getText();
-           // Validate input
-    if (add_id.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "AdminId is required to delete the record.");
-        return;
-    }
+        add_id = admin_id.getText();
+        // Validate input
+        if (add_id.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "AdminId is required to delete the record.");
 
-    // Establish database connection
-    Database_Connection dbConnection = new Database_Connection();
-    Connection con = dbConnection.getConnection();
-
-    // Delete query
-    String deleteQuery = "DELETE FROM admin WHERE AdminId = ?";
-
-    try {
-        // Prepare the statement
-        PreparedStatement preparedStatement = con.prepareStatement(deleteQuery);
-
-        // Set the AdminId value
-        preparedStatement.setString(1, add_id);
-
-        // Execute the query
-        int rowsAffected = preparedStatement.executeUpdate();
-
-        // Check if the deletion was successful
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Admin record deleted successfully.");
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to delete the admin record. Please check the AdminId.");
-        }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error occurred while deleting the admin record: " + e.getMessage());
-        e.printStackTrace();
-    } finally {
-        // Close the database connection
-        dbConnection.closeConnection();
-    }
+        } else
+        {
+            Admin ad3=new Admin(add_id,name,gender,phone,role,email,pass);
+      ad3.Delete();
+       clearFields();
     }//GEN-LAST:event_btnDeleteActionPerformed
+    }
 
     /**
      * @param args the command line arguments

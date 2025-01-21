@@ -1,8 +1,5 @@
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 /*
@@ -25,6 +22,7 @@ public class ManageDoctor extends javax.swing.JFrame {
     public ManageDoctor() {
         initComponents();
     }
+    
 public void getValues(){
     
     name=doc_name.getText();
@@ -51,6 +49,21 @@ public void getValues(){
              JOptionPane.showMessageDialog(null, "Enter Valid Room no (in numbers).");
         }
     
+}
+  private void clearFields() {
+    doc_name.setText("");       // Clear the ID field
+  doc_gen.setText("");      // Clear the password field
+    doc_spec.setText("");
+    doc_id.setText("");
+    doc_exp.setText("");
+    doc_room_no.setText("");
+     doc_phone.setText("");
+    doc_role.setText("");
+     doc_pass.setText("");
+     doc_conf_pass.setText("");
+     
+
+// Clear the role field
 }
 public boolean ValidateInputs() {
     // Validate Name, Gender, Specialty, Doctor ID (non-empty strings)
@@ -292,36 +305,10 @@ public boolean ValidateInputs() {
         getValues();
         if(ValidateInputs()){
             
-             Database_Connection dbConnection = new Database_Connection();
-    Connection conn = dbConnection.getConnection();
-    
-    String query = "INSERT INTO doctor (DoctorId, Name, Experience,DocRoomNo,Gender,Phoneno,Specialization,Role,Password) " +
-                   "VALUES (?, ?, ?, ?, ?, ?,?, ?, ?)";
-
-    try (PreparedStatement stmt = conn.prepareStatement(query)) {
-        // Set the values from user inputs
-        stmt.setString(1, doctorID);
-        stmt.setString(2,name );
-        stmt.setInt(3, exp);
-        stmt.setInt(4, room_no );
-        stmt.setString(5, gender);
-        stmt.setLong(6, number);
-        stmt.setString(7, spec);
-        stmt.setString(8,role);
-        stmt.setString(9,pass);
-
-        // Execute the query and check if the insertion was successful
-        int rowsAffected = stmt.executeUpdate();
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Doctor information added successfully!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to add doctor information.");
-        }
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-    }
+            Doctor doc1=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
             
+            doc1.AddToDB();
+            clearFields();
         }
     }//GEN-LAST:event_AddbtnActionPerformed
 
@@ -330,37 +317,10 @@ public boolean ValidateInputs() {
          getValues(); // Retrieve values from the form
     
     if (ValidateInputs()) {
+        Doctor doc2=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
+            doc2.UpdateDb();
+             clearFields();
         
-        // Create Database connection
-        Database_Connection dbConnection = new Database_Connection();
-        Connection conn = dbConnection.getConnection();
-
-        String query = "UPDATE doctor SET Name = ?, Experience = ?, DocRoomNo = ?, Gender = ?, Phoneno = ?, Specialization = ?, Role = ?, Password = ? " +
-                       "WHERE DoctorId = ?";
-
-        try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            // Set the values from user inputs
-            stmt.setString(1, name);
-            stmt.setInt(2, exp);
-            stmt.setInt(3, room_no);
-            stmt.setString(4, gender);
-            stmt.setLong(5, number);
-            stmt.setString(6, spec);
-            stmt.setString(7, role);
-            stmt.setString(8, pass);
-            stmt.setString(9, doctorID);  // Use DoctorId to identify the record to update
-
-            // Execute the update and check if it was successful
-            int rowsAffected = stmt.executeUpdate();
-            if (rowsAffected > 0) {
-                JOptionPane.showMessageDialog(null, "Doctor information updated successfully!");
-            } else {
-                JOptionPane.showMessageDialog(null, "Failed to update doctor information. Doctor ID might be incorrect.");
-            }
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-        }
     }
     }//GEN-LAST:event_updatebtnActionPerformed
 
@@ -371,32 +331,17 @@ public boolean ValidateInputs() {
     // Validate if doctorID is not empty
     if (doctor_ID.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Doctor ID cannot be empty.");
-        return;
+       
     }
-
+    else{
     // Create Database connection
-    Database_Connection dbConnection = new Database_Connection();
-    Connection conn = dbConnection.getConnection();
-
-    String query = "DELETE FROM doctor WHERE DoctorId = ?";
-
-    try (PreparedStatement stmt = conn.prepareStatement(query)) {
-        // Set the doctorID for the DELETE operation
-        stmt.setString(1, doctor_ID);
-
-        // Execute the delete query and check if the deletion was successful
-        int rowsAffected = stmt.executeUpdate();
-        if (rowsAffected > 0) {
-            JOptionPane.showMessageDialog(null, "Doctor information deleted successfully!");
-        } else {
-            JOptionPane.showMessageDialog(null, "Failed to delete doctor information. Doctor ID may not exist.");
-        }
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-    }
+   
+   
+   Doctor doc3=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
+            doc3.Delete();
+             clearFields();
     }//GEN-LAST:event_delbtnActionPerformed
-
+}
     private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
         // TODO add your handling code here:
          String doctor_id_1 = doc_id.getText(); // Or another method to get doctorID
@@ -404,55 +349,15 @@ public boolean ValidateInputs() {
     // Validate if doctorID is not empty
     if (doctor_id_1.isEmpty()) {
         JOptionPane.showMessageDialog(null, "Doctor ID cannot be empty.");
-        return;
+       
     }
-
+    else{
     // Create Database connection
-    Database_Connection dbConnection = new Database_Connection();
-    Connection conn = dbConnection.getConnection();
-
-    String query = "SELECT * FROM doctor WHERE DoctorId = ?";
-
-    try (PreparedStatement stmt = conn.prepareStatement(query)) {
-        // Set the doctorID for the SELECT operation
-        stmt.setString(1, doctor_id_1);
-
-        // Execute the query and get the result
-        ResultSet rs = stmt.executeQuery();
-
-        // Check if a record was found
-        if (rs.next()) {
-            // Display the doctor information (example: you can set it to labels or fields)
-            String name1 = rs.getString("Name");
-            int experience = rs.getInt("Experience");
-            int roomNo = rs.getInt("DocRoomNo");
-            String gender1 = rs.getString("Gender");
-            long phoneNo = rs.getLong("Phoneno");
-            String specialization = rs.getString("Specialization");
-            String role1 = rs.getString("Role");
-            String password = rs.getString("Password");
-
-            // Display doctor info (for example, on a label or text fields)
-            JOptionPane.showMessageDialog(null, 
-                "Doctor Information:\n" +
-                "Name: " + name1 + "\n" +
-                "Experience: " + experience + " years\n" +
-                "Room No: " + roomNo + "\n" +
-                "Gender: " + gender1 + "\n" +
-                "Phone: " + phoneNo + "\n" +
-                "Specialization: " + specialization + "\n" +
-                "Role: " + role1 + "\n" +
-                "Password: " + password
-            );
-        } else {
-            JOptionPane.showMessageDialog(null, "Doctor with the given ID not found.");
-        }
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-    }
+   Doctor doc4=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
+            doc4.Search();
+      
     }//GEN-LAST:event_searchbtnActionPerformed
-
+}
     /**
      * @param args the command line arguments
      */

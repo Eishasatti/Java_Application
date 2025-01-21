@@ -1,3 +1,12 @@
+
+import java.awt.HeadlessException;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerDateModel;
+import java.util.Date; // For working with date and time
+import java.text.SimpleDateFormat; // For formatting the date/time as needed
+import java.util.ArrayList;
+import javax.swing.JOptionPane; // For showing dialog boxes
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -8,6 +17,9 @@
  * @author EISHA
  */
 public class ScheduleApp extends javax.swing.JFrame {
+    String ap_id,a_time;
+    Date ap_date;
+    Doctor doctor;
 
     /**
      * Creates new form ScheduleApp
@@ -19,8 +31,18 @@ public class ScheduleApp extends javax.swing.JFrame {
         amount.setText("Rs:2000");
         amount.setEditable(false);
         notes.setEditable(false);
+        loadDoctor();
+        loadPatient();
     }
+public void getInputs(){
+      Date selectedTime = (Date) app_time.getValue();
+    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+    String formattedTime = timeFormat.format(selectedTime);
+a_time=formattedTime;
+ap_id=App_id.getText();
+ap_date=appDate.getDate();
 
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -46,7 +68,6 @@ public class ScheduleApp extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         doc_avail = new javax.swing.JComboBox<>();
         pat_reg = new javax.swing.JComboBox<>();
-        jComboBox4 = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
@@ -64,6 +85,7 @@ public class ScheduleApp extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         notes = new javax.swing.JTextArea();
         backbtn = new javax.swing.JButton();
+        app_time = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -96,6 +118,11 @@ public class ScheduleApp extends javax.swing.JFrame {
         jButton1.setBackground(new java.awt.Color(255, 255, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton1.setText("ADD");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 100, 35));
 
         jButton3.setBackground(new java.awt.Color(255, 255, 204));
@@ -138,14 +165,6 @@ public class ScheduleApp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(pat_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 130, 40));
-
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jComboBox4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 130, 130, 40));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Amount:");
@@ -209,6 +228,10 @@ public class ScheduleApp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(backbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 20, -1, -1));
+        jPanel1.add(app_time, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 130, 150, 40));
+        SpinnerDateModel timeModel = new SpinnerDateModel();
+        app_time.setModel(timeModel);
+        app_time.setEditor(new JSpinner.DateEditor(app_time, "HH:mm")); // Set format to HH:mm
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1210, 540));
 
@@ -217,15 +240,50 @@ public class ScheduleApp extends javax.swing.JFrame {
 
     private void doc_availActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doc_availActionPerformed
         // TODO add your handling code here:
+       
+
+        
     }//GEN-LAST:event_doc_availActionPerformed
 
+    public void loadDoctor(){
+         try{ 
+      Doctor doct=new Doctor();
+      ArrayList<String> doctorDetails = doct.getDoctorList();
+
+        // Clear existing items in the JComboBox
+        doc_avail.removeAllItems();
+
+        // Populate the JComboBox with doctor names
+        for (String name : doctorDetails) {
+            doc_avail.addItem(name);
+        }
+
+       
+    } catch (HeadlessException e) {
+        JOptionPane.showMessageDialog(this, "Error loading doctors: " + e.getMessage());
+    }
+    }
+     public void loadPatient(){
+         try{ 
+      Patient pat=new Patient();
+             ArrayList<String> PatientDetails = pat.getPatientList();
+
+        // Clear existing items in the JComboBox
+        pat_reg.removeAllItems();
+
+        // Populate the JComboBox with doctor names
+        for (String name : PatientDetails) {
+            pat_reg.addItem(name);
+        }
+
+       
+    } catch (HeadlessException e) {
+        JOptionPane.showMessageDialog(this, "Error loading doctors: " + e.getMessage());
+    }
+    }
     private void pat_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pat_regActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pat_regActionPerformed
-
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox4ActionPerformed
 
     private void process_paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_process_paymentActionPerformed
         // TODO add your handling code here:
@@ -236,6 +294,14 @@ public class ScheduleApp extends javax.swing.JFrame {
          this.setVisible(false);
         new ReceptionistInterface().setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       
+    // Display the selected time
+  
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -276,6 +342,7 @@ public class ScheduleApp extends javax.swing.JFrame {
     private javax.swing.JTextField App_id;
     private javax.swing.JTextField amount;
     private com.toedter.calendar.JDateChooser appDate;
+    private javax.swing.JSpinner app_time;
     private javax.swing.JButton backbtn;
     private javax.swing.JTextField card_holder;
     private javax.swing.JTextField card_no;
@@ -285,7 +352,6 @@ public class ScheduleApp extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
