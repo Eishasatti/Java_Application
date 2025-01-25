@@ -304,6 +304,45 @@ public void SearchAllDoctors() {
         dbConnection.closeConnection();
     }
 }
+public String getDoctorRoomNumber(String appointmentId, String patientId) {
+    String docRoomNo = null;
+
+    // Establish database connection
+    Database_Connection DBcon = new Database_Connection();
+    Connection con = DBcon.getConnection();
+
+    try {
+        // SQL query to fetch Doctor Room Number
+        String query = "SELECT d.DocRoomNo " +
+                       "FROM appointment a " +
+                       "JOIN doctor d ON a.DoctorId = d.DoctorId " +
+                       "WHERE a.AppId = ? AND a.PatientId = ?";
+
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, appointmentId); // Set the Appointment ID
+        pstmt.setString(2, patientId);    // Set the Patient ID
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            // Fetch the Doctor Room Number
+            docRoomNo = rs.getString("DocRoomNo");
+        }
+    } catch (SQLException e) {
+        // Handle SQL exception
+        JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        // Close the database connection
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    return docRoomNo;
+}
 
     public void Login(String u_id, String password, String role) {
         doctor_id=u_id;

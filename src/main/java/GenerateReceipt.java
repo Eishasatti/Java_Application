@@ -11,6 +11,7 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.HeadlessException;
 import java.awt.print.PageFormat;
 import java.awt.print.Paper;
 import java.awt.print.Printable;
@@ -36,8 +37,33 @@ double bHeight=0.0;
      */
     public GenerateReceipt() {
         initComponents();
+        loadPaidAppointmentIds();
+        loadRoomNo();
     }
+ public void loadRoomNo(){
+        // Get the selected Appointment ID
+        String selectedAppointmentId = (String) app_id.getSelectedItem();
+        String selectedPatientId = (String) patient_id.getSelectedItem(); // Assuming patient_id is also a JComboBox
 
+        if (selectedAppointmentId != null && selectedPatientId != null &&
+            !selectedAppointmentId.trim().isEmpty() && !selectedPatientId.trim().isEmpty()) {
+
+            // Fetch the Doctor Room Number
+            Doctor doc4=new Doctor();
+            
+            String docRoomNo = doc4.getDoctorRoomNumber(selectedAppointmentId, selectedPatientId);
+
+            if (docRoomNo != null) {
+                // Display the Doctor Room Number
+                doc_room.removeAllItems();
+                doc_room.addItem(docRoomNo);
+                doc_room.setSelectedItem(docRoomNo);
+            } else {
+                JOptionPane.showMessageDialog(null, "No Doctor Room Number found for the selected Appointment and Patient ID.", "Information", JOptionPane.INFORMATION_MESSAGE);
+                doc_room.removeAllItems();
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -55,14 +81,13 @@ double bHeight=0.0;
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        appoi_id = new javax.swing.JTextField();
         recep_id = new javax.swing.JTextField();
         recepsionist_id = new javax.swing.JTextField();
-        pay_sta = new javax.swing.JTextField();
-        patient_id = new javax.swing.JTextField();
-        room_doc = new javax.swing.JComboBox<>();
-        generate_recp = new javax.swing.JButton();
+        doc_room = new javax.swing.JComboBox<>();
         peint_recep = new javax.swing.JButton();
+        app_id = new javax.swing.JComboBox<>();
+        patient_id = new javax.swing.JComboBox<>();
+        payStatus = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -95,16 +120,7 @@ double bHeight=0.0;
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Receptionist Id:");
 
-        room_doc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        generate_recp.setBackground(new java.awt.Color(255, 255, 204));
-        generate_recp.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        generate_recp.setText("Generate Receipt");
-        generate_recp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                generate_recpActionPerformed(evt);
-            }
-        });
+        doc_room.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         peint_recep.setBackground(new java.awt.Color(255, 255, 204));
         peint_recep.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -115,6 +131,17 @@ double bHeight=0.0;
             }
         });
 
+        app_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        app_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_idActionPerformed(evt);
+            }
+        });
+
+        patient_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        payStatus.setText("Paid");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,20 +149,20 @@ double bHeight=0.0;
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(appoi_id, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(recep_id, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(patient_id, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
+                    .addComponent(jLabel5)
+                    .addComponent(app_id, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(patient_id, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(jLabel7)
-                    .addComponent(pay_sta, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8)
                     .addComponent(recepsionist_id, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(room_doc, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(doc_room, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(payStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(84, 84, 84))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,10 +171,8 @@ double bHeight=0.0;
                         .addGap(39, 39, 39)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(generate_recp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(peint_recep, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(136, 136, 136)
+                        .addComponent(peint_recep, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(88, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -162,11 +187,11 @@ double bHeight=0.0;
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(room_doc, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(doc_room, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(appoi_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(app_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
@@ -174,20 +199,18 @@ double bHeight=0.0;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(recep_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pay_sta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(payStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(patient_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(recepsionist_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(generate_recp)
-                .addGap(18, 18, 18)
+                            .addComponent(recepsionist_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(patient_id, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
                 .addComponent(peint_recep)
-                .addContainerGap())
+                .addGap(31, 31, 31))
         );
 
         pack();
@@ -198,23 +221,43 @@ double bHeight=0.0;
          this.setVisible(false);
         new ReceptionistDashBoard().setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
+public void loadPaidAppointmentIds() {
+    try {
+        // Create an instance of the class containing the getPaidAppointmentList method
+        Appointment appointment = new Appointment();
+        ArrayList<String> paidAppointmentIds = appointment.getPaidAppointmentList();
 
-    private void generate_recpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_recpActionPerformed
-        // TODO add your handling code here:
-       pat_id=patient_id.getText();
-           
-     App_id=appoi_id.getText();
-       Recp_id=recep_id.getText();
-      Recpt_id=recepsionist_id.getText();
-     room_no = Integer.parseInt(room_doc.getSelectedItem().toString());
+        // Clear existing items in the JComboBox
+        app_id.removeAllItems();
 
-      pay_status=pay_sta.getText();
-     
-        
-    }//GEN-LAST:event_generate_recpActionPerformed
+        // Populate the JComboBox with paid appointment IDs
+        for (String appointmentId : paidAppointmentIds) {
+            app_id.addItem(appointmentId);
+        }
+    } catch (HeadlessException e) {
+        JOptionPane.showMessageDialog(this, "Error loading paid appointment IDs: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+   
+    }
+}
 
     private void peint_recepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_peint_recepActionPerformed
         // TODO add your handling code here:
+         pat_id=patient_id.getSelectedItem().toString();
+           
+     App_id=(String) app_id.getSelectedItem();
+       Recp_id=recep_id.getText();
+      Recpt_id=recepsionist_id.getText();
+     room_no = Integer.parseInt(doc_room.getSelectedItem().toString());
+
+     if(Recp_id.isEmpty()){
+          JOptionPane.showMessageDialog(null, "Receipt id is mandatory: ");
+   
+     }
+     else{
+       ReceiptPrint pri=new ReceiptPrint(App_id,pat_id,Recp_id,Recpt_id,room_no);
+       pri.AddtoDb();
+     }
+     
                  bHeight = (double) App_id.length();
                  JOptionPane.showMessageDialog(rootPane, bHeight);
                  PrinterJob pj=PrinterJob.getPrinterJob();
@@ -226,6 +269,36 @@ double bHeight=0.0;
                      ex.printStackTrace();
                  }
     }//GEN-LAST:event_peint_recepActionPerformed
+
+    private void app_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_idActionPerformed
+        // TODO add your handling code here:
+        
+        // Get the selected Appointment ID
+        String selectedAppointmentId = (String) app_id.getSelectedItem();
+
+        if (selectedAppointmentId != null && !selectedAppointmentId.trim().isEmpty()) {
+            Appointment app2=new Appointment();
+            // Fetch the Patient ID for the selected Appointment ID
+            String patientId = app2.getPatientIdByAppointmentId(selectedAppointmentId);
+
+            if (patientId != null) {
+                // Clear existing items in the Patient ID JComboBox
+                patient_id.removeAllItems();
+
+                // Add the fetched Patient ID to the JComboBox
+                patient_id.addItem(patientId);
+
+                // Optionally, set it as the selected item
+                patient_id.setSelectedItem(patientId);
+// Example: Display in a JLabel
+            } else {
+                // Handle case where no Patient ID is found
+                JOptionPane.showMessageDialog(null, "No Patient ID found for the selected Appointment ID.", "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    
+
+    }//GEN-LAST:event_app_idActionPerformed
 
     public PageFormat getPageFormat(PrinterJob pj){
         PageFormat pf=pj.defaultPage();
@@ -376,9 +449,9 @@ double bHeight=0.0;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField appoi_id;
+    private javax.swing.JComboBox<String> app_id;
     private javax.swing.JButton backbtn;
-    private javax.swing.JButton generate_recp;
+    private javax.swing.JComboBox<String> doc_room;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -386,11 +459,10 @@ double bHeight=0.0;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JTextField patient_id;
-    private javax.swing.JTextField pay_sta;
+    private javax.swing.JComboBox<String> patient_id;
+    private javax.swing.JTextField payStatus;
     private javax.swing.JButton peint_recep;
     private javax.swing.JTextField recep_id;
     private javax.swing.JTextField recepsionist_id;
-    private javax.swing.JComboBox<String> room_doc;
     // End of variables declaration//GEN-END:variables
 }

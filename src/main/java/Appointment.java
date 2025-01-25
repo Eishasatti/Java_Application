@@ -101,6 +101,41 @@ public class Appointment {
             dbConnection.closeConnection();
         }
     }
+    public String getPatientIdByAppointmentId(String appointmentId) {
+    String patientId = null;
+
+    // Establish database connection
+    Database_Connection DBcon = new Database_Connection();
+    Connection con = DBcon.getConnection();
+
+    try {
+        // SQL query to fetch PatientId for the selected AppointmentId
+        String query = "SELECT PatientId FROM appointment WHERE AppId = ?";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        pstmt.setString(1, appointmentId); // Set the appointment ID parameter
+        ResultSet rs = pstmt.executeQuery();
+
+        if (rs.next()) {
+            // Fetch the Patient ID
+            patientId = rs.getString("PatientId");
+        }
+    } catch (SQLException e) {
+        // Handle SQL exception
+        JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        // Close the database connection
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    return patientId;
+}
+
       public ArrayList<String> getAppointmentList() {
                ArrayList<String> appointmentIds = new ArrayList<>();
  
@@ -135,6 +170,41 @@ public class Appointment {
 }
 
     }
+    return appointmentIds;
+}
+
+      public ArrayList<String> getPaidAppointmentList() {
+    ArrayList<String> appointmentIds = new ArrayList<>();
+
+    // Establish database connection
+    Database_Connection DBcon = new Database_Connection();
+    Connection con = DBcon.getConnection();
+
+    try {
+        // SQL query to select appointment IDs where payment status is 'Paid'
+        String query = "SELECT AppId FROM payment WHERE PayStatus = 'Paid'";
+        PreparedStatement pstmt = con.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        // Loop through the result set and add IDs to the list
+        while (rs.next()) {
+            String appointmentId = rs.getString("AppId");
+            appointmentIds.add(appointmentId);
+        }
+    } catch (SQLException e) {
+        // Handle SQL exception with a message dialog
+        JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } finally {
+        // Close the database connection
+        try {
+            if (con != null) {
+                con.close();
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     return appointmentIds;
 }
 

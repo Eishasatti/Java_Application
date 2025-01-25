@@ -15,4 +15,10 @@ public class ReceiptPrint {
     public String Recpt_id;
     public int room_no;
     public String pay_status;
+    public ReceiptPrint(String App_id,String pat_id,String Recp_id,String Recpt_id,int room_no){
+        
+    }
+    public void AddtoDb(){
+        
+    }
 }
