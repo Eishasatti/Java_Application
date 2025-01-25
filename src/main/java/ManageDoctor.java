@@ -1,5 +1,6 @@
 
-
+import java.awt.Image;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /*
@@ -12,51 +13,31 @@ import javax.swing.JOptionPane;
  * @author EISHA
  */
 public class ManageDoctor extends javax.swing.JFrame {
-          String name,gender,spec,doctorID,ph_number,pass,conf_pass,role;
+ String name,gender,spec,doctorID,ph_number,pass,conf_pass,role;
           int exp,room_no;
           long number;
-          
     /**
      * Creates new form ManageDoctor
      */
     public ManageDoctor() {
         initComponents();
+        scaleImage();
     }
-    
-public void getValues(){
-    
-    name=doc_name.getText();
-    gender=doc_gen.getText();
-    spec=doc_spec.getText();
-    doctorID=doc_id.getText();
-    ph_number=doc_phone.getText();
-    number=Long.parseLong(ph_number);
-    role=doc_role.getText();
-      pass = new String(doc_pass.getPassword());
-      conf_pass=new String(doc_conf_pass.getPassword());
-     try {
-           exp = Integer.parseInt(doc_exp.getText());
-     } catch (NumberFormatException e)
-     {
-    // Handle the error, e.g., show a message to the user
-             JOptionPane.showMessageDialog(null, "Enter Exp in numbers.");
-        }
- try {
-           room_no=Integer.parseInt(doc_room_no.getText());
-     } catch (NumberFormatException e)
-     {
-    // Handle the error, e.g., show a message to the user
-             JOptionPane.showMessageDialog(null, "Enter Valid Room no (in numbers).");
-        }
-    
-}
-  private void clearFields() {
+     public void scaleImage() {
+        ImageIcon icon = new ImageIcon("C:\\Users\\EISHA\\Desktop\\patientbackk.jpeg");
+        Image img = icon.getImage();
+        Image imgScale = img.getScaledInstance(back_img_label.getWidth(), back_img_label.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        back_img_label.setIcon(scaledIcon);
+
+    }
+    private void clearFields() {
     doc_name.setText("");       // Clear the ID field
   doc_gen.setText("");      // Clear the password field
     doc_spec.setText("");
     doc_id.setText("");
     doc_exp.setText("");
-    doc_room_no.setText("");
+    doc_room.setText("");
      doc_phone.setText("");
     doc_role.setText("");
      doc_pass.setText("");
@@ -65,7 +46,7 @@ public void getValues(){
 
 // Clear the role field
 }
-public boolean ValidateInputs() {
+    public boolean ValidateInputs() {
     // Validate Name, Gender, Specialty, Doctor ID (non-empty strings)
     if (name == null || name.trim().isEmpty() || 
         gender == null || gender.trim().isEmpty() || 
@@ -123,6 +104,35 @@ public boolean ValidateInputs() {
     return true;
 }
 
+   
+public void getValues(){
+    
+    name=doc_name.getText();
+    gender=doc_gen.getText();
+    spec=doc_spec.getText();
+    doctorID=doc_id.getText();
+    ph_number=doc_phone.getText();
+    number=Long.parseLong(ph_number);
+    role=doc_role.getText();
+      pass = new String(doc_pass.getPassword());
+      conf_pass=new String(doc_conf_pass.getPassword());
+     try {
+           exp = Integer.parseInt(doc_exp.getText());
+     } catch (NumberFormatException e)
+     {
+    // Handle the error, e.g., show a message to the user
+             JOptionPane.showMessageDialog(null, "Enter Exp in numbers.");
+        }
+ try {
+           room_no=Integer.parseInt(doc_room.getText());
+     } catch (NumberFormatException e)
+     {
+    // Handle the error, e.g., show a message to the user
+             JOptionPane.showMessageDialog(null, "Enter Valid Room no (in numbers).");
+        }
+    
+}
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -133,231 +143,218 @@ public boolean ValidateInputs() {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        doc_spec = new javax.swing.JTextField();
-        doc_name = new javax.swing.JTextField();
-        doc_exp = new javax.swing.JTextField();
-        doc_gen = new javax.swing.JTextField();
-        doc_role = new javax.swing.JTextField();
-        doc_phone = new javax.swing.JTextField();
-        doc_id = new javax.swing.JTextField();
-        doc_room_no = new javax.swing.JTextField();
-        Addbtn = new javax.swing.JButton();
-        delbtn = new javax.swing.JButton();
-        updatebtn = new javax.swing.JButton();
-        searchbtn = new javax.swing.JButton();
-        backbtn = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        doc_pass = new javax.swing.JPasswordField();
         doc_conf_pass = new javax.swing.JPasswordField();
+        doc_pass = new javax.swing.JPasswordField();
+        doc_name = new javax.swing.JTextField();
+        doc_phone = new javax.swing.JTextField();
+        doc_gen = new javax.swing.JTextField();
+        doc_spec = new javax.swing.JTextField();
+        doc_exp = new javax.swing.JTextField();
+        doc_id = new javax.swing.JTextField();
+        doc_room = new javax.swing.JTextField();
+        doc_role = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnSearchAll = new javax.swing.JButton();
+        btnSearch = new javax.swing.JButton();
+        back_img_label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 102, 102));
+        jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("Manage Doctor");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(311, 27, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(269, 23, -1, -1));
+
+        jButton1.setBackground(new java.awt.Color(255, 153, 153));
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jButton1.setText("<-");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 23, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel2.setText("Doctor Id:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 221, -1, -1));
+        jLabel2.setText("Name:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 104, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel3.setText("DoctorRoomNo:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 221, -1, -1));
+        jLabel3.setText("Doctor ID:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 194, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel4.setText("Password:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 221, -1, -1));
+        jLabel4.setText("Experience:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 104, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Doctor Room no:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 194, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("Confirm Password:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 221, -1, -1));
+        jLabel6.setText("Gender:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 104, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel7.setText("Role:");
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 221, -1, -1));
+        jLabel7.setText("Password:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 194, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel8.setText("Phone #:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(593, 117, -1, -1));
+        jLabel8.setText("Phone no:");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 104, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel9.setText("Specialization:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 117, -1, -1));
+        jLabel9.setText("Confirm Password:");
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 194, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel10.setText("Gender:");
-        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 117, -1, -1));
+        jLabel10.setText("Specialization:");
+        getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(738, 104, -1, -1));
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel11.setText("Name:");
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 117, -1, -1));
+        jLabel11.setText("Role:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(738, 194, -1, -1));
+        getContentPane().add(doc_conf_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 220, 100, 25));
+        getContentPane().add(doc_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 220, 100, 25));
+        getContentPane().add(doc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 126, 100, 25));
+        getContentPane().add(doc_phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 126, 100, 25));
+        getContentPane().add(doc_gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(369, 126, 100, 25));
+        getContentPane().add(doc_spec, new org.netbeans.lib.awtextra.AbsoluteConstraints(738, 126, 100, 25));
+        getContentPane().add(doc_exp, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 126, 100, 25));
+        getContentPane().add(doc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 220, 100, 25));
+        getContentPane().add(doc_room, new org.netbeans.lib.awtextra.AbsoluteConstraints(202, 220, 100, 25));
+        getContentPane().add(doc_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(738, 220, 100, 25));
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel12.setText("Experience:");
-        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 117, -1, -1));
-        getContentPane().add(doc_spec, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 143, 120, 35));
-        getContentPane().add(doc_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 143, 120, 35));
-        getContentPane().add(doc_exp, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 143, 120, 35));
-        getContentPane().add(doc_gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 143, 120, 35));
-        getContentPane().add(doc_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(772, 247, 120, 35));
-        getContentPane().add(doc_phone, new org.netbeans.lib.awtextra.AbsoluteConstraints(595, 143, 120, 35));
-        getContentPane().add(doc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 247, 120, 35));
-        getContentPane().add(doc_room_no, new org.netbeans.lib.awtextra.AbsoluteConstraints(219, 247, 120, 35));
-
-        Addbtn.setBackground(new java.awt.Color(255, 255, 204));
-        Addbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        Addbtn.setText("ADD");
-        Addbtn.addActionListener(new java.awt.event.ActionListener() {
+        btnAdd.setBackground(new java.awt.Color(255, 255, 204));
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAdd.setText("ADD");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddbtnActionPerformed(evt);
+                btnAddActionPerformed(evt);
             }
         });
-        getContentPane().add(Addbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(165, 316, 100, 40));
+        getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 272, 100, 40));
 
-        delbtn.setBackground(new java.awt.Color(255, 255, 204));
-        delbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        delbtn.setText("DELETE");
-        delbtn.addActionListener(new java.awt.event.ActionListener() {
+        btnUpdate.setBackground(new java.awt.Color(255, 255, 204));
+        btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnUpdate.setText("UPDATE");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delbtnActionPerformed(evt);
+                btnUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(delbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(776, 316, 100, 40));
+        getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(284, 272, 100, 40));
 
-        updatebtn.setBackground(new java.awt.Color(255, 255, 204));
-        updatebtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        updatebtn.setText("UPDATE");
-        updatebtn.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setBackground(new java.awt.Color(255, 255, 204));
+        btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnDelete.setText("DELETE");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatebtnActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(updatebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(359, 316, 100, 40));
+        getContentPane().add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(464, 272, 100, 40));
 
-        searchbtn.setBackground(new java.awt.Color(255, 255, 204));
-        searchbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        searchbtn.setText("SEARCH");
-        searchbtn.addActionListener(new java.awt.event.ActionListener() {
+        btnSearchAll.setBackground(new java.awt.Color(204, 204, 204));
+        btnSearchAll.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearchAll.setText("SEARCH ALL");
+        btnSearchAll.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchbtnActionPerformed(evt);
+                btnSearchAllActionPerformed(evt);
             }
         });
-        getContentPane().add(searchbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(562, 316, 100, 40));
+        getContentPane().add(btnSearchAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 330, 200, -1));
 
-        backbtn.setBackground(new java.awt.Color(255, 51, 51));
-        backbtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        backbtn.setText("<-");
-        backbtn.addActionListener(new java.awt.event.ActionListener() {
+        btnSearch.setBackground(new java.awt.Color(255, 255, 204));
+        btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnSearch.setText("SEARCH");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backbtnActionPerformed(evt);
+                btnSearchActionPerformed(evt);
             }
         });
-        getContentPane().add(backbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 6, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(388, 388, 388)
-                .addComponent(doc_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85)
-                .addComponent(doc_conf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(246, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(doc_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(doc_conf_pass, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(129, 129, 129))
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 410));
+        getContentPane().add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(655, 272, 100, 40));
+        getContentPane().add(back_img_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, 0, 870, 370));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        getValues();
+        if(true){
+            Doctor doct=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
+            
+            doct.AddToDB();
+            clearFields();
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+         getValues();
+        if(true){
+            Doctor doct1=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
+            
+            doct1.UpdateDb();
+            clearFields();
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        String doctors_id=doc_id.getText();
+        if(doctors_id.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Id is reuired for deleting");
+        }
+        else{
+            Doctor doctor1=new Doctor();
+              doctor1.Delete(doctors_id);
+              clearFields();
+        }
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+         String doctors_id=doc_id.getText();
+          if(doctors_id.isEmpty()){
+            JOptionPane.showMessageDialog(null,"Id is reuired for deleting");
+        }
+        else{
+               Doctor doctor1=new Doctor();
+               doctor1.Search(doctors_id);
+               clearFields();
+          }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnSearchAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchAllActionPerformed
+        // TODO add your handling code here:
+        Doctor doctor1=new Doctor();
+               doctor1.SearchAllDoctors();
+    }//GEN-LAST:event_btnSearchAllActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
         new AdminInterface().setVisible(true);
-    }//GEN-LAST:event_backbtnActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void AddbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddbtnActionPerformed
-        // TODO add your handling code here:
-        getValues();
-        if(ValidateInputs()){
-            
-            Doctor doc1=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
-            
-            doc1.AddToDB();
-            clearFields();
-        }
-    }//GEN-LAST:event_AddbtnActionPerformed
-
-    private void updatebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatebtnActionPerformed
-        // TODO add your handling code here:
-         getValues(); // Retrieve values from the form
-    
-    if (ValidateInputs()) {
-        Doctor doc2=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
-            doc2.UpdateDb();
-             clearFields();
-        
-    }
-    }//GEN-LAST:event_updatebtnActionPerformed
-
-    private void delbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delbtnActionPerformed
-        // TODO add your handling code here:
-        String doctor_ID = doc_id.getText(); // Or another method to get doctorID
-
-    // Validate if doctorID is not empty
-    if (doctor_ID.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Doctor ID cannot be empty.");
-       
-    }
-    else{
-    // Create Database connection
-   
-   
-   Doctor doc3=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
-            doc3.Delete();
-             clearFields();
-    }//GEN-LAST:event_delbtnActionPerformed
-}
-    private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
-        // TODO add your handling code here:
-         String doctor_id_1 = doc_id.getText(); // Or another method to get doctorID
-
-    // Validate if doctorID is not empty
-    if (doctor_id_1.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Doctor ID cannot be empty.");
-       
-    }
-    else{
-    // Create Database connection
-   Doctor doc4=new Doctor(doctorID,name,exp,room_no,gender,number,spec,role,pass);
-            doc4.Search();
-      
-    }//GEN-LAST:event_searchbtnActionPerformed
-}
     /**
      * @param args the command line arguments
      */
@@ -394,9 +391,12 @@ public boolean ValidateInputs() {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Addbtn;
-    private javax.swing.JButton backbtn;
-    private javax.swing.JButton delbtn;
+    private javax.swing.JLabel back_img_label;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnSearchAll;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JPasswordField doc_conf_pass;
     private javax.swing.JTextField doc_exp;
     private javax.swing.JTextField doc_gen;
@@ -405,21 +405,19 @@ public boolean ValidateInputs() {
     private javax.swing.JPasswordField doc_pass;
     private javax.swing.JTextField doc_phone;
     private javax.swing.JTextField doc_role;
-    private javax.swing.JTextField doc_room_no;
+    private javax.swing.JTextField doc_room;
     private javax.swing.JTextField doc_spec;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JButton searchbtn;
-    private javax.swing.JButton updatebtn;
     // End of variables declaration//GEN-END:variables
 }

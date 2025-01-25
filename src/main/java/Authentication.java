@@ -55,7 +55,7 @@ public class Authentication {
 
                     case "receptionist":
                         
-                        new ReceptionistInterface().setVisible(true); // Open Receptionist Interface
+                        new ReceptionistDashBoard().setVisible(true); // Open Receptionist Interface
                         break;
 
                     default:

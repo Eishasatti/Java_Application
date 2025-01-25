@@ -17,9 +17,11 @@ import javax.swing.JOptionPane; // For showing dialog boxes
  * @author EISHA
  */
 public class ScheduleApp extends javax.swing.JFrame {
-    String ap_id,a_time;
+    String ap_id,d_id,p_id,a_time;
     Date ap_date;
+  
     Doctor doctor;
+    
 
     /**
      * Creates new form ScheduleApp
@@ -34,15 +36,40 @@ public class ScheduleApp extends javax.swing.JFrame {
         loadDoctor();
         loadPatient();
     }
-public void getInputs(){
-      Date selectedTime = (Date) app_time.getValue();
-    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
-    String formattedTime = timeFormat.format(selectedTime);
-a_time=formattedTime;
-ap_id=App_id.getText();
-ap_date=appDate.getDate();
+public void getInputs() {
+    // Fetch the selected time from the time picker (assuming it's a JSpinner or JDateChooser)
+    Object selectedTime = app_time.getValue();
+    if (selectedTime != null)
+    {
+        if (selectedTime instanceof Date) {
+            // Format the selected time to HH:mm
+            SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+            a_time = timeFormat.format((Date) selectedTime);  // Format and assign to a_time
+        } else {
+            // Handle case where time is not in the expected format
+            JOptionPane.showMessageDialog(null, "Invalid time format selected.");
+            return;  // Exit if time format is invalid
+        }
+    } else {
+        // Handle case where no time is selected
+        JOptionPane.showMessageDialog(null, "Please select a valid time.");
+        return;  // Exit if no time is selected
+    }
 
+    // Collect the other input fields
+    ap_id = app_id.getText();  // Appointment ID from text field
+    ap_date = appDate.getDate();  // Appointment date from date picker
+    d_id = (String) doc_id.getSelectedItem();  // Doctor ID from combo box
+    p_id = (String) pat_id.getSelectedItem();  // Patient ID from combo box
+
+    // Optional: Display the gathered inputs for debugging
+    System.out.println("Appointment ID: " + ap_id);
+    System.out.println("Appointment Date: " + ap_date);
+    System.out.println("Doctor ID: " + d_id);
+    System.out.println("Patient ID: " + p_id);
+    System.out.println("Appointment Time: " + a_time);
 }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,16 +85,16 @@ ap_date=appDate.getDate();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        App_id = new javax.swing.JTextField();
+        app_id = new javax.swing.JTextField();
         appDate = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Add = new javax.swing.JButton();
+        Delete = new javax.swing.JButton();
+        Search = new javax.swing.JButton();
+        Update = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        doc_avail = new javax.swing.JComboBox<>();
-        pat_reg = new javax.swing.JComboBox<>();
+        doc_id = new javax.swing.JComboBox<>();
+        pat_id = new javax.swing.JComboBox<>();
         jLabel13 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel14 = new javax.swing.JLabel();
@@ -86,6 +113,7 @@ ap_date=appDate.getDate();
         notes = new javax.swing.JTextArea();
         backbtn = new javax.swing.JButton();
         app_time = new javax.swing.JSpinner();
+        SearchAll = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -112,33 +140,33 @@ ap_date=appDate.getDate();
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Appointment Time:");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1000, 110, -1, -1));
-        jPanel1.add(App_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 130, 40));
+        jPanel1.add(app_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 130, 130, 40));
         jPanel1.add(appDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 130, 150, 40));
 
-        jButton1.setBackground(new java.awt.Color(255, 255, 204));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("ADD");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Add.setBackground(new java.awt.Color(255, 255, 204));
+        Add.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Add.setText("ADD");
+        Add.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AddActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 100, 35));
+        jPanel1.add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 210, 100, 35));
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 204));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton3.setText("DELETE");
-        jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 210, 100, 35));
+        Delete.setBackground(new java.awt.Color(255, 255, 204));
+        Delete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Delete.setText("DELETE");
+        jPanel1.add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 100, 35));
 
-        jButton4.setBackground(new java.awt.Color(255, 255, 204));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton4.setText("SEARCH");
-        jPanel1.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, 100, 35));
+        Search.setBackground(new java.awt.Color(255, 255, 204));
+        Search.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Search.setText("SEARCH");
+        jPanel1.add(Search, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 210, 100, 35));
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 204));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton2.setText("UPDATE");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 210, 100, 35));
+        Update.setBackground(new java.awt.Color(255, 255, 204));
+        Update.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        Update.setText("UPDATE");
+        jPanel1.add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 210, 100, 35));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 102, 102));
@@ -150,21 +178,21 @@ ap_date=appDate.getDate();
         jLabel7.setText("Payment Details");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 330, 360, 45));
 
-        doc_avail.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        doc_avail.addActionListener(new java.awt.event.ActionListener() {
+        doc_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        doc_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                doc_availActionPerformed(evt);
+                doc_idActionPerformed(evt);
             }
         });
-        jPanel1.add(doc_avail, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 130, 40));
+        jPanel1.add(doc_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 130, 40));
 
-        pat_reg.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        pat_reg.addActionListener(new java.awt.event.ActionListener() {
+        pat_id.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        pat_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pat_regActionPerformed(evt);
+                pat_idActionPerformed(evt);
             }
         });
-        jPanel1.add(pat_reg, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 130, 40));
+        jPanel1.add(pat_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 130, 130, 40));
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel13.setText("Amount:");
@@ -233,17 +261,22 @@ ap_date=appDate.getDate();
         app_time.setModel(timeModel);
         app_time.setEditor(new JSpinner.DateEditor(app_time, "HH:mm")); // Set format to HH:mm
 
+        SearchAll.setBackground(new java.awt.Color(255, 255, 204));
+        SearchAll.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        SearchAll.setText("SearchAll");
+        jPanel1.add(SearchAll, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 210, 100, 35));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -10, 1210, 540));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void doc_availActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doc_availActionPerformed
+    private void doc_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doc_idActionPerformed
         // TODO add your handling code here:
        
 
         
-    }//GEN-LAST:event_doc_availActionPerformed
+    }//GEN-LAST:event_doc_idActionPerformed
 
     public void loadDoctor(){
          try{ 
@@ -251,11 +284,11 @@ ap_date=appDate.getDate();
       ArrayList<String> doctorDetails = doct.getDoctorList();
 
         // Clear existing items in the JComboBox
-        doc_avail.removeAllItems();
+        doc_id.removeAllItems();
 
         // Populate the JComboBox with doctor names
         for (String name : doctorDetails) {
-            doc_avail.addItem(name);
+            doc_id.addItem(name);
         }
 
        
@@ -269,11 +302,11 @@ ap_date=appDate.getDate();
              ArrayList<String> PatientDetails = pat.getPatientList();
 
         // Clear existing items in the JComboBox
-        pat_reg.removeAllItems();
+        pat_id.removeAllItems();
 
         // Populate the JComboBox with doctor names
         for (String name : PatientDetails) {
-            pat_reg.addItem(name);
+            pat_id.addItem(name);
         }
 
        
@@ -281,9 +314,9 @@ ap_date=appDate.getDate();
         JOptionPane.showMessageDialog(this, "Error loading doctors: " + e.getMessage());
     }
     }
-    private void pat_regActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pat_regActionPerformed
+    private void pat_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pat_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_pat_regActionPerformed
+    }//GEN-LAST:event_pat_idActionPerformed
 
     private void process_paymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_process_paymentActionPerformed
         // TODO add your handling code here:
@@ -292,16 +325,18 @@ ap_date=appDate.getDate();
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
         // TODO add your handling code here:
          this.setVisible(false);
-        new ReceptionistInterface().setVisible(true);
+        new ReceptionistDashBoard().setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
         // TODO add your handling code here:
-       
+        getInputs();
+       Appointment app=new Appointment(ap_id,d_id,p_id,ap_date,a_time);
     // Display the selected time
+    app.Add();
   
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_AddActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,19 +374,20 @@ ap_date=appDate.getDate();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField App_id;
+    private javax.swing.JButton Add;
+    private javax.swing.JButton Delete;
+    private javax.swing.JButton Search;
+    private javax.swing.JButton SearchAll;
+    private javax.swing.JButton Update;
     private javax.swing.JTextField amount;
     private com.toedter.calendar.JDateChooser appDate;
+    private javax.swing.JTextField app_id;
     private javax.swing.JSpinner app_time;
     private javax.swing.JButton backbtn;
     private javax.swing.JTextField card_holder;
     private javax.swing.JTextField card_no;
     private javax.swing.JTextField cvv;
-    private javax.swing.JComboBox<String> doc_avail;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JComboBox<String> doc_id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -369,7 +405,7 @@ ap_date=appDate.getDate();
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextArea notes;
-    private javax.swing.JComboBox<String> pat_reg;
+    private javax.swing.JComboBox<String> pat_id;
     private javax.swing.JTextField pay_id;
     private javax.swing.JTextField pay_method;
     private javax.swing.JButton process_payment;

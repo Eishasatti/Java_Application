@@ -8,7 +8,11 @@
  * @author EISHA
  */
 import java.sql.*;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Admin {
 
@@ -106,6 +110,73 @@ public class Admin {
         }
     }
 
+    public void Search(String ad1){
+        String add_id=ad1;
+        Database_Connection dbConnection = new Database_Connection();
+Connection con = dbConnection.getConnection();
+
+// Search query
+String searchQuery = "SELECT * FROM admin WHERE AdminId = ?";
+
+try {
+    // Prepare the statement
+    PreparedStatement preparedStatement = con.prepareStatement(searchQuery);
+
+    // Set the AdminId value
+    preparedStatement.setString(1, add_id);
+
+    // Execute the query
+    ResultSet resultSet = preparedStatement.executeQuery();
+
+    // Check if a record was found
+    if (resultSet.next()) {
+        // Create a JTable to display the result
+        JTable table = new JTable();
+        DefaultTableModel tableModel = new DefaultTableModel();
+
+        // Add columns to the table model
+        tableModel.addColumn("AdminId");
+        tableModel.addColumn("Name");
+        tableModel.addColumn("Phone No");
+        tableModel.addColumn("Email");
+        tableModel.addColumn("Password");
+
+        // Add the retrieved record to the table model
+        tableModel.addRow(new Object[]{
+            resultSet.getString("AdminId"),
+            resultSet.getString("Name"),
+            resultSet.getString("Phoneno"),
+            resultSet.getString("Email"),
+            resultSet.getString("Password")
+        });
+
+        // Set the model to the JTable
+        table.setModel(tableModel);
+
+        // Display the JTable in a JScrollPane for better usability
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Display the table in a centralized JFrame
+        JFrame tableFrame = new JFrame("Admin Details");
+        tableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        tableFrame.add(scrollPane);
+        tableFrame.setSize(600, 200);
+        tableFrame.setLocationRelativeTo(null); // Center the frame
+        tableFrame.setVisible(true);
+
+        // Optionally, you can still set the form fields with the retrieved values
+     
+    } else {
+        JOptionPane.showMessageDialog(null, "No admin found with the given AdminId.");
+    }
+} catch (SQLException e) {
+    JOptionPane.showMessageDialog(null, "Error occurred while searching for the admin record: " + e.getMessage());
+    e.printStackTrace();
+} finally {
+    // Close the database connection
+    dbConnection.closeConnection();
+}
+    }
     public void Delete() {
          // Establish database connection
             Database_Connection dbConnection = new Database_Connection();

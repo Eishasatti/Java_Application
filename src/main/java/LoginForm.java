@@ -41,22 +41,18 @@ public class LoginForm extends javax.swing.JFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 255, 204));
         jLabel1.setText("Login");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 23, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, -1));
 
         password.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        password.setForeground(new java.awt.Color(255, 255, 204));
         password.setText("Password");
         getContentPane().add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 154, -1, -1));
 
         user_name.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        user_name.setForeground(new java.awt.Color(255, 255, 204));
         user_name.setText("ID");
         getContentPane().add(user_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(81, 113, -1, -1));
 
         role.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        role.setForeground(new java.awt.Color(255, 255, 204));
         role.setText("Role");
         getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 191, -1, -1));
         getContentPane().add(login_user_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 140, 30));
@@ -80,7 +76,7 @@ public class LoginForm extends javax.swing.JFrame {
         });
         getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 140, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\EISHA\\Desktop\\and-healthcare\\and-healthcare\\back1.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/signupimg.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 300));
 
         pack();
@@ -115,6 +111,7 @@ public class LoginForm extends javax.swing.JFrame {
             if (role.equalsIgnoreCase("doctor")) {
         Doctor doct1 = new Doctor();
         doct1.Login(id, password, role);
+        
     } else if (role.equalsIgnoreCase("admin")) {
         Admin admin1 = new Admin();
         admin1.Login(id, password, role);

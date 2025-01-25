@@ -196,7 +196,7 @@ double bHeight=0.0;
     private void backbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backbtnActionPerformed
         // TODO add your handling code here:
          this.setVisible(false);
-        new ReceptionistInterface().setVisible(true);
+        new ReceptionistDashBoard().setVisible(true);
     }//GEN-LAST:event_backbtnActionPerformed
 
     private void generate_recpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generate_recpActionPerformed

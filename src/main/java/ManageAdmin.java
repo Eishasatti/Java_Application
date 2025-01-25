@@ -1,10 +1,12 @@
 
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /*
@@ -15,7 +17,7 @@ import javax.swing.JOptionPane;
  *
  * @author EISHA
  */
-public class ManAdmin extends javax.swing.JFrame {
+public class ManageAdmin extends javax.swing.JFrame {
 
     String name, gender, pass, conf_pass, email, role, add_id, ph_no;
     long phone;
@@ -23,12 +25,21 @@ public class ManAdmin extends javax.swing.JFrame {
     /**
      * Creates new form ManAdmin
      */
-    public ManAdmin() {
+    public ManageAdmin() {
         initComponents();
-        note.setEditable(false);
+//        note.setEditable(false);
+        scaleImage();
 
     }
-
+ public void scaleImage(){
+       ImageIcon icon=new ImageIcon("C:\\Users\\EISHA\\Desktop\\doctorrback.jpg");
+       Image img=icon.getImage();
+       Image imgScale=img.getScaledInstance(back_img_label.getWidth(),back_img_label.getHeight(),Image.SCALE_SMOOTH);
+       ImageIcon scaledIcon=new ImageIcon(imgScale);
+       back_img_label.setIcon(scaledIcon);
+       
+       
+   }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -59,10 +70,8 @@ public class ManAdmin extends javax.swing.JFrame {
         btnAdd = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        note = new javax.swing.JTextArea();
         btnBack = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        back_img_label = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -70,47 +79,47 @@ public class ManAdmin extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 51, 51));
         jLabel1.setText("Manage Admin");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 6, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel2.setText("Name:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 70, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Phone #:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 160, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel4.setText("Admin Id:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 160, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel5.setText("Confirm Password:");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 340, -1, -1));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Password:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, -1, -1));
 
         admin_gen.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         admin_gen.setText("Gender:");
-        getContentPane().add(admin_gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, -1, -1));
+        getContentPane().add(admin_gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 70, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel8.setText("Role:");
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, -1, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel9.setText("Email:");
-        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, -1));
-        getContentPane().add(admin_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 130, 40));
-        getContentPane().add(admin_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 180, 130, 40));
-        getContentPane().add(ad_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, 130, 40));
-        getContentPane().add(ad_gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 90, 130, 40));
-        getContentPane().add(admin_num, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 130, 40));
-        getContentPane().add(add_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 270, 130, 40));
-        getContentPane().add(admin_conf_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 360, 130, 40));
-        getContentPane().add(admin_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 130, 40));
+        getContentPane().add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 250, -1, -1));
+        getContentPane().add(admin_name, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 130, 40));
+        getContentPane().add(admin_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 180, 130, 40));
+        getContentPane().add(ad_role, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 130, 40));
+        getContentPane().add(ad_gen, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 90, 130, 40));
+        getContentPane().add(admin_num, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 130, 40));
+        getContentPane().add(add_email, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 270, 130, 40));
+        getContentPane().add(admin_conf_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 360, 130, 40));
+        getContentPane().add(admin_pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 130, 40));
 
         btnSearch.setBackground(new java.awt.Color(255, 255, 204));
         btnSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -120,7 +129,7 @@ public class ManAdmin extends javax.swing.JFrame {
                 btnSearchActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 480, 130, 40));
+        getContentPane().add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 500, 130, 40));
 
         btnAdd.setBackground(new java.awt.Color(255, 255, 204));
         btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -130,7 +139,7 @@ public class ManAdmin extends javax.swing.JFrame {
                 btnAddActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 130, 40));
+        getContentPane().add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 130, 40));
 
         btnUpdate.setBackground(new java.awt.Color(255, 255, 204));
         btnUpdate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -140,7 +149,7 @@ public class ManAdmin extends javax.swing.JFrame {
                 btnUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 420, 130, 40));
+        getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 430, 130, 40));
 
         btnDelete.setBackground(new java.awt.Color(255, 255, 204));
         btnDelete.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -150,20 +159,7 @@ public class ManAdmin extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 130, 40));
-
-        jScrollPane1.setBackground(new java.awt.Color(153, 153, 255));
-        jScrollPane1.setForeground(new java.awt.Color(255, 0, 0));
-
-        note.setBackground(new java.awt.Color(153, 153, 255));
-        note.setColumns(20);
-        note.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        note.setForeground(new java.awt.Color(255, 0, 0));
-        note.setRows(5);
-        note.setText("For Add and Update all input fields are mandatory.\nFor delete and search only Admin Id is required\n\n");
-        jScrollPane1.setViewportView(note);
-
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 530, 470, 50));
+        getContentPane().add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 500, 130, 40));
 
         btnBack.setBackground(new java.awt.Color(255, 0, 0));
         btnBack.setText("<-");
@@ -173,23 +169,10 @@ public class ManAdmin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
-
-        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 470, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 580, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 470, 580));
+        getContentPane().add(back_img_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, 660, 580));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
   
@@ -203,51 +186,12 @@ public class ManAdmin extends javax.swing.JFrame {
 
         }
 
-        // Establish database connection
-        Database_Connection dbConnection = new Database_Connection();
-        Connection con = dbConnection.getConnection();
-
-        // Search query
-        String searchQuery = "SELECT * FROM admin WHERE AdminId = ?";
-
-        try {
-            // Prepare the statement
-            PreparedStatement preparedStatement = con.prepareStatement(searchQuery);
-
-            // Set the AdminId value
-            preparedStatement.setString(1, add_id);
-
-            // Execute the query
-            ResultSet resultSet = preparedStatement.executeQuery();
-
-            // Check if a record was found
-            if (resultSet.next()) {
-                // Retrieve the admin data from the result set and display in the form
-                String adminId = resultSet.getString("AdminId");
-                String username = resultSet.getString("Name");
-                String phonenoad = resultSet.getString("Phoneno");
-
-                String password = resultSet.getString("Password");
-
-                String email_admin = resultSet.getString("Email");
-
-                // Set the form fields with the retrieved values
-                admin_id.setText(adminId);
-                admin_name.setText(username);
-                admin_num.setText(phonenoad);
-                add_email.setText(email_admin);
-                admin_pass.setText(password);
-
-            } else {
-                JOptionPane.showMessageDialog(null, "No admin found with the given AdminId.");
+             else {
+                Admin adam=new Admin();
+                adam.Search(add_id);
             }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error occurred while searching for the admin record: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            // Close the database connection
-            dbConnection.closeConnection();
-        }
+       
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     public boolean ValidateInputAll() {
@@ -367,7 +311,7 @@ public class ManAdmin extends javax.swing.JFrame {
       ad3.Delete();
        clearFields();
     }//GEN-LAST:event_btnDeleteActionPerformed
-    }
+    }    
 
     /**
      * @param args the command line arguments
@@ -386,20 +330,21 @@ public class ManAdmin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManageAdmin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ManAdmin().setVisible(true);
+                new ManageAdmin().setVisible(true);
             }
         });
     }
@@ -414,6 +359,7 @@ public class ManAdmin extends javax.swing.JFrame {
     private javax.swing.JTextField admin_name;
     private javax.swing.JTextField admin_num;
     private javax.swing.JPasswordField admin_pass;
+    private javax.swing.JLabel back_img_label;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDelete;
@@ -427,8 +373,5 @@ public class ManAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea note;
     // End of variables declaration//GEN-END:variables
 }

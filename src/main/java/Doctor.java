@@ -9,7 +9,11 @@
  */
 import java.sql.*;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 public class Doctor {
 
@@ -94,6 +98,9 @@ public Doctor(String doc_id,String doc_name,int doc_exp,int doc_room,String doc_
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
     }
+    finally{
+        dbConnection.closeConnection();
+    }
             
     }
     
@@ -130,14 +137,15 @@ public Doctor(String doc_id,String doc_name,int doc_exp,int doc_room,String doc_
     
     }
     
-    public void Delete(){
+    public void Delete(String ddid){
+        String did_id=ddid;
          Database_Connection dbConnection = new Database_Connection();
     Connection conn = dbConnection.getConnection();
  String query = "DELETE FROM doctor WHERE DoctorId = ?";
 
   try (PreparedStatement stmt = conn.prepareStatement(query)) {
         // Set the doctorID for the DELETE operation
-        stmt.setString(1, doctor_id);
+        stmt.setString(1, did_id);
 
         // Execute the delete query and check if the deletion was successful
         int rowsAffected = stmt.executeUpdate();
@@ -152,51 +160,140 @@ public Doctor(String doc_id,String doc_name,int doc_exp,int doc_room,String doc_
     }
     }
     
-    public void Search(){
-         Database_Connection dbConnection = new Database_Connection();
+public void Search(String dod) {
+    String dod_id = dod;
+    Database_Connection dbConnection = new Database_Connection();
     Connection conn = dbConnection.getConnection();
 
     String query = "SELECT * FROM doctor WHERE DoctorId = ?";
-    
-     try (PreparedStatement stmt = conn.prepareStatement(query)) {
-        // Set the doctorID for the SELECT operation
-        stmt.setString(1, doctor_id);
+
+    try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        // Set the DoctorId for the SELECT operation
+        stmt.setString(1, dod_id);
 
         // Execute the query and get the result
         ResultSet rs = stmt.executeQuery();
 
-        // Check if a record was found
-        if (rs.next()) {
-            // Display the doctor information (example: you can set it to labels or fields)
-            String name1 = rs.getString("Name");
-            int experience = rs.getInt("Experience");
-            int roomNo = rs.getInt("DocRoomNo");
-            String gender1 = rs.getString("Gender");
-            long phoneNo = rs.getLong("Phoneno");
-            String specialization = rs.getString("Specialization");
-            String role1 = rs.getString("Role");
-            String password = rs.getString("Password");
+        // Create a JTable to display the result
+        JTable table = new JTable();
+        DefaultTableModel tableModel = new DefaultTableModel();
 
-            // Display doctor info (for example, on a label or text fields)
-            JOptionPane.showMessageDialog(null, 
-                "Doctor Information:\n" +
-                "Name: " + name1 + "\n" +
-                "Experience: " + experience + " years\n" +
-                "Room No: " + roomNo + "\n" +
-                "Gender: " + gender1 + "\n" +
-                "Phone: " + phoneNo + "\n" +
-                "Specialization: " + specialization + "\n" +
-                "Role: " + role1 + "\n" +
-                "Password: " + password
-            );
-              } else {
+        // Add columns to the table model
+        tableModel.addColumn("DoctorId");
+        tableModel.addColumn("Name");
+        tableModel.addColumn("Experience");
+        tableModel.addColumn("Room No");
+        tableModel.addColumn("Gender");
+        tableModel.addColumn("Phone No");
+        tableModel.addColumn("Specialization");
+        tableModel.addColumn("Role");
+        tableModel.addColumn("Password");
+
+        // Populate the table model with data from the ResultSet
+        if (rs.next()) {
+            do {
+                tableModel.addRow(new Object[]{
+                    dod_id,
+                    rs.getString("Name"),
+                    rs.getInt("Experience"),
+                    rs.getInt("DocRoomNo"),
+                    rs.getString("Gender"),
+                    rs.getLong("Phoneno"),
+                    rs.getString("Specialization"),
+                    rs.getString("Role"),
+                    rs.getString("Password")
+                });
+            } while (rs.next());
+        } else {
             JOptionPane.showMessageDialog(null, "Doctor with the given ID not found.");
+            return; // Exit the method if no data is found
         }
+
+        // Set the model to the JTable
+        table.setModel(tableModel);
+
+        // Display the JTable in a JScrollPane for better usability
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Create a new JFrame to display the table
+        JFrame tableFrame = new JFrame("Doctor Details");
+        tableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        tableFrame.add(scrollPane);
+        tableFrame.setSize(800, 300);
+        tableFrame.setLocationRelativeTo(null); // Center the frame
+        tableFrame.setVisible(true);
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        e.printStackTrace();
+    } finally {
+        // Close the database connection
+        dbConnection.closeConnection();
     }
+}
+public void SearchAllDoctors() {
+    Database_Connection dbConnection = new Database_Connection();
+    Connection conn = dbConnection.getConnection();
+
+    String query = "SELECT * FROM doctor";
+
+    try (PreparedStatement stmt = conn.prepareStatement(query)) {
+        // Execute the query and get the result
+        ResultSet rs = stmt.executeQuery();
+
+        // Create a JTable to display the result
+        JTable table = new JTable();
+        DefaultTableModel tableModel = new DefaultTableModel();
+
+        // Add columns to the table model
+        tableModel.addColumn("DoctorId");
+        tableModel.addColumn("Name");
+        tableModel.addColumn("Experience");
+        tableModel.addColumn("Room No");
+        tableModel.addColumn("Gender");
+        tableModel.addColumn("Phone No");
+        tableModel.addColumn("Specialization");
+        tableModel.addColumn("Role");
+        tableModel.addColumn("Password");
+
+        // Populate the table model with data from the ResultSet
+        while (rs.next()) {
+            tableModel.addRow(new Object[]{
+                rs.getString("DoctorId"),
+                rs.getString("Name"),
+                rs.getInt("Experience"),
+                rs.getInt("DocRoomNo"),
+                rs.getString("Gender"),
+                rs.getLong("Phoneno"),
+                rs.getString("Specialization"),
+                rs.getString("Role"),
+                rs.getString("Password")
+            });
+        }
+
+        // Set the model to the JTable
+        table.setModel(tableModel);
+
+        // Display the JTable in a JScrollPane for better usability
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        // Create a new JFrame to display the table
+        JFrame tableFrame = new JFrame("All Doctor Details");
+        tableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        tableFrame.add(scrollPane);
+        tableFrame.setSize(800, 300);
+        tableFrame.setLocationRelativeTo(null); // Center the frame
+        tableFrame.setVisible(true);
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+        e.printStackTrace();
+    } finally {
+        // Close the database connection
+        dbConnection.closeConnection();
     }
+}
+
     public void Login(String u_id, String password, String role) {
         doctor_id=u_id;
         d_pass=password;

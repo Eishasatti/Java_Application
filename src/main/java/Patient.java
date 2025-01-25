@@ -5,7 +5,11 @@ import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -65,6 +69,136 @@ public class Patient {
             // Close the database connection
             dbConnection.closeConnection();
         }
+    }
+    public void SearchById(String pat_1_id){
+        String patient_s_id=pat_1_id;
+         Database_Connection dbConnection = new Database_Connection();
+            Connection conn = dbConnection.getConnection(); // Get the connection
+
+            // SQL select query to search for a patient by PatientId
+            String searchQuery = "SELECT * FROM patient WHERE PatientId = ?";
+
+            try (PreparedStatement stmt = conn.prepareStatement(searchQuery)) {
+                // Set the PatientId for the record to search
+                stmt.setString(1,patient_s_id );
+
+                // Execute the search query
+                ResultSet rs = stmt.executeQuery();
+
+                // Create a JTable to display the result
+                JTable table = new JTable();
+                DefaultTableModel tableModel = new DefaultTableModel();
+
+                // Add columns to the table model
+                tableModel.addColumn("PatientId");
+                tableModel.addColumn("Name");
+                tableModel.addColumn("Gender");
+                tableModel.addColumn("Age");
+                tableModel.addColumn("Phone No");
+                tableModel.addColumn("Emergency Contact");
+
+                // Populate the table model with data from the ResultSet
+                if (rs.next()) {
+                    do {
+                        tableModel.addRow(new Object[]{
+                            rs.getString("PatientId"),
+                            rs.getString("Name"),
+                            rs.getString("Gender"),
+                            rs.getString("Age"),
+                            rs.getString("Phoneno"),
+                            rs.getString("EmgContact")
+                        });
+                    } while (rs.next());
+                } else {
+                    JOptionPane.showMessageDialog(null, "No patient found with that PatientId.");
+                    return; // Exit the method if no data is found
+                }
+
+                // Set the model to the JTable
+                table.setModel(tableModel);
+
+                // Display the JTable in a JScrollPane for better usability
+                JScrollPane scrollPane = new JScrollPane(table);
+                scrollPane.setSize(800, 300);
+
+                // Display the table in a new JFrame
+                JFrame tableFrame = new JFrame("Patient Details");
+                tableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                tableFrame.add(scrollPane);
+                tableFrame.setSize(800, 300);
+                tableFrame.setVisible(true);
+
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(null, "Error: Unable to search for patient.");
+                ex.printStackTrace();
+            } finally {
+                // Close the database connection
+                dbConnection.closeConnection();
+            }
+    }
+    public void SearchAllPatients(){
+         Database_Connection dbConnection = new Database_Connection();
+        Connection conn = dbConnection.getConnection(); // Get the connection
+
+        // SQL select query to retrieve all patient records
+        String searchQuery = "SELECT * FROM patient";
+
+        try (PreparedStatement stmt = conn.prepareStatement(searchQuery)) {
+            // Execute the search query
+            ResultSet rs = stmt.executeQuery();
+
+            // Create a JTable to display the result
+            JTable table = new JTable();
+            DefaultTableModel tableModel = new DefaultTableModel();
+
+            // Add columns to the table model
+            tableModel.addColumn("PatientId");
+            tableModel.addColumn("Name");
+            tableModel.addColumn("Gender");
+            tableModel.addColumn("Age");
+            tableModel.addColumn("Phone No");
+            tableModel.addColumn("Emergency Contact");
+
+            // Populate the table model with data from the ResultSet
+            while (rs.next()) {
+                tableModel.addRow(new Object[]{
+                    rs.getString("PatientId"),
+                    rs.getString("Name"),
+                    rs.getString("Gender"),
+                    rs.getString("Age"),
+                    rs.getString("Phoneno"),
+                    rs.getString("EmgContact")
+                });
+            }
+
+            // Check if there are no records in the table
+            if (tableModel.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "No patients found in the database.");
+                return; // Exit the method if no data is found
+            }
+
+            // Set the model to the JTable
+            table.setModel(tableModel);
+
+            // Display the JTable in a JScrollPane for better usability
+            JScrollPane scrollPane = new JScrollPane(table);
+            scrollPane.setSize(800, 300);
+
+            // Display the table in a new JFrame
+            JFrame tableFrame = new JFrame("Patient Details");
+            tableFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            tableFrame.add(scrollPane);
+            tableFrame.setSize(800, 300);
+            tableFrame.setVisible(true);
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error: Unable to retrieve patient data.");
+            ex.printStackTrace();
+        } finally {
+            // Close the database connection
+            dbConnection.closeConnection();
+        }
+
     }
   /*
     public void SearchfromDb(String pat_id){

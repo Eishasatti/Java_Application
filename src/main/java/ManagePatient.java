@@ -1,29 +1,34 @@
 
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
 /**
  *
  * @author EISHA
  */
 public class ManagePatient extends javax.swing.JFrame {
-         String name,gender,age_pat,phoneno,id,emg_cont;
-         long ph_no,emg_no;
-         int age;
-        
+
+    String name, gender, age_pat, phoneno, id, emg_cont;
+    long ph_no, emg_no;
+    int age;
 
     /**
      * Creates new form ManagePatient
      */
-          public void clearFields(){
+    public void clearFields() {
         pat_name.setText("");
         pat_gender.setText("");
         pat_age.setText("");
@@ -31,81 +36,92 @@ public class ManagePatient extends javax.swing.JFrame {
         pat_emerg_no.setText("");
         pat_id.setText("");
     }
-    public void getValues(){
+
+    public void getValues() {
         name = pat_name.getText();
-    gender = pat_gender.getText();
-    age_pat = pat_age.getText();
-    
-    phoneno = pat_phone.getText();
-    emg_cont = pat_emerg_no.getText();
-    id = pat_id.getText();
-        
+        gender = pat_gender.getText();
+        age_pat = pat_age.getText();
+
+        phoneno = pat_phone.getText();
+        emg_cont = pat_emerg_no.getText();
+        id = pat_id.getText();
+
     }
- public boolean ValidateInput() {
-    // Validate Name
-    if (name.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "Name cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-    
-    // Validate Gender
-    if (!gender.equalsIgnoreCase("M") && !gender.equalsIgnoreCase("F")) {
-        JOptionPane.showMessageDialog(null, "Gender must be 'M' or 'F'.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-    
-    // Validate Age
-    try {
-        age = Integer.parseInt(age_pat);
-        if (age <= 0) {
-            JOptionPane.showMessageDialog(null, "Age must be a positive number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+
+    public boolean ValidateInput() {
+        // Validate Name
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Name cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Invalid age input.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-    
-    // Validate Phone Number
-    try {
-        ph_no = Long.parseLong(phoneno);
-        if (phoneno.length() != 10) {
-            JOptionPane.showMessageDialog(null, "Phone number must be 10 digits.", "Input Error", JOptionPane.ERROR_MESSAGE);
+
+        // Validate Gender
+        if (!gender.equalsIgnoreCase("M") && !gender.equalsIgnoreCase("F")) {
+            JOptionPane.showMessageDialog(null, "Gender must be 'M' or 'F'.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Invalid phone number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-    
-    // Validate Emergency Contact Number
-    try {
-        emg_no = Long.parseLong(emg_cont);
-        if (emg_cont.length() != 10) {
-            JOptionPane.showMessageDialog(null, "Emergency contact number must be 10 digits.", "Input Error", JOptionPane.ERROR_MESSAGE);
+
+        // Validate Age
+        try {
+            age = Integer.parseInt(age_pat);
+            if (age <= 0) {
+                JOptionPane.showMessageDialog(null, "Age must be a positive number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid age input.", "Input Error", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Invalid emergency contact number.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
-    
-    // Validate ID
-    if (id.isEmpty()) {
-        JOptionPane.showMessageDialog(null, "ID cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
-        return false;
-    }
+
+        // Validate Phone Number
+        try {
+            ph_no = Long.parseLong(phoneno);
+            if (phoneno.length() != 10) {
+                JOptionPane.showMessageDialog(null, "Phone number must be 10 digits.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid phone number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validate Emergency Contact Number
+        try {
+            emg_no = Long.parseLong(emg_cont);
+            if (emg_cont.length() != 10) {
+                JOptionPane.showMessageDialog(null, "Emergency contact number must be 10 digits.", "Input Error", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid emergency contact number.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validate ID
+        if (id.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "ID cannot be empty.", "Input Error", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
 //    Patient patient=new Patient();
-    return true; 
-  
+        return true;
+
 // If all validations pass
-}
-   
-   public ManagePatient() {
+    }
+
+    public ManagePatient() {
         initComponents();
-        
+        scaleImage();
+
 //        notes_below.setEditable(false);
-        
+    }
+
+    public void scaleImage() {
+        ImageIcon icon = new ImageIcon("C:\\Users\\EISHA\\Desktop\\patientbackk.jpeg");
+        Image img = icon.getImage();
+        Image imgScale = img.getScaledInstance(back_img_label.getWidth(), back_img_label.getHeight(), Image.SCALE_SMOOTH);
+        ImageIcon scaledIcon = new ImageIcon(imgScale);
+        back_img_label.setIcon(scaledIcon);
+
     }
 
     /**
@@ -135,7 +151,8 @@ public class ManagePatient extends javax.swing.JFrame {
         search_patient = new javax.swing.JButton();
         update_patient = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        back_img_label = new javax.swing.JLabel();
+        allPatients = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -223,119 +240,89 @@ public class ManagePatient extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
+        getContentPane().add(back_img_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, 740, 370));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 204));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 410));
+        allPatients.setBackground(new java.awt.Color(204, 204, 204));
+        allPatients.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        allPatients.setText("Search All Patients");
+        allPatients.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                allPatientsActionPerformed(evt);
+            }
+        });
+        getContentPane().add(allPatients, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 330, 200, 30));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void delete_patientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delete_patientActionPerformed
         // TODO add your handling code here:
-        String id1=pat_id.getText(); // Retrieve the values from the input fields
-    
-    if (id1!=null) {  // Validate the input fields
-        // Create a new Database_Connection instance
-         Patient patient=new Patient();
-    patient.DeletefromDb(id1);
-    clearFields();
-    }else{
-        JOptionPane.showMessageDialog(null, "Error: Unable to delete for patient.ID required");
-            
-    }
+        String id1 = pat_id.getText(); // Retrieve the values from the input fields
+
+        if (id1 != null) {  // Validate the input fields
+            // Create a new Database_Connection instance
+            Patient patient = new Patient();
+            patient.DeletefromDb(id1);
+            clearFields();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: Unable to delete for patient.ID required");
+
+        }
     }//GEN-LAST:event_delete_patientActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new ReceptionistInterface().setVisible(true);
+        new ReceptionistDashBoard().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void add_patientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_add_patientActionPerformed
         // TODO add your handling code here:
-      getValues();  // Retrieve the values from the input fields
-    
-    if (ValidateInput()) {  // Validate the input fields
-        // Create a new Database_Connection instance
-    Patient patient=new Patient();
-    patient.Insert(id,gender, ph_no, name, age, emg_no);
-     clearFields();
-   
-      
-        
+        getValues();  // Retrieve the values from the input fields
+
+        if (ValidateInput()) {  // Validate the input fields
+            // Create a new Database_Connection instance
+            Patient patient = new Patient();
+            patient.Insert(id, gender, ph_no, name, age, emg_no);
+            clearFields();
+
+
     }//GEN-LAST:event_add_patientActionPerformed
-}
-   
+    }
+
     private void update_patientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_update_patientActionPerformed
         // TODO add your handling code here:
-  getValues();  // Retrieve the values from the input fields
-    
-    if (ValidateInput()) {  // Validate the input fields
-        // Create a new Database_Connection instance
-        Patient patient=new Patient();
-    patient.UpdateInDb(id,gender, ph_no, name, age, emg_no);
-     clearFields();
+        getValues();  // Retrieve the values from the input fields
+
+        if (ValidateInput()) {  // Validate the input fields
+            // Create a new Database_Connection instance
+            Patient patient = new Patient();
+            patient.UpdateInDb(id, gender, ph_no, name, age, emg_no);
+            clearFields();
     }//GEN-LAST:event_update_patientActionPerformed
     }
     private void search_patientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_patientActionPerformed
         // TODO add your handling code here:
-         String id2=pat_id.getText(); // Retrieve the values from the input fields
-    
-     // Validate the input fields
-        // Create a new Database_Connection instance
-        if(id2!=null){
-            
-            Database_Connection dbConnection = new Database_Connection();
-        Connection conn = dbConnection.getConnection();  // Get the connection
+        String id2 = pat_id.getText(); // Retrieve the value from the input field
 
-        // SQL select query to search for a patient by PatientId
-        String searchQuery = "SELECT * FROM patient WHERE PatientId = ?";
-        
-        try (PreparedStatement stmt = conn.prepareStatement(searchQuery)) {
-            // Set the PatientId for the record to search
-            stmt.setString(1, id2);  // Assuming `id` is the correct PatientId to search
-            
-            // Execute the search query
-            ResultSet rs = stmt.executeQuery();
-
-            // Check if a record is found
-            if (rs.next()) {
-                // Retrieve data from the result set and populate fields (example)
-                String name = rs.getString("Name");
-                String gender = rs.getString("Gender");
-                String age = rs.getString("Age");
-                String phoneNo = rs.getString("Phoneno");
-                String emgContact = rs.getString("EmgContact");
-
-                // Display or use the data (e.g., in your form fields)
-//                JOptionPane.showMessageDialog(null, "Patient found: " + name + ", " + gender + ", " + age);
-                
-                // Optionally, you can populate form fields with the retrieved data
-                // For example: 
-                 pat_name.setText(name);
-                 pat_gender.setText(gender);
-                 pat_age.setText(age);
-                 pat_phone.setText(phoneNo);
-                 pat_emerg_no.setText(emgContact);
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "No patient found with that PatientId.");
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: Unable to search for patient.");
-            
-            ex.printStackTrace();
-        } finally {
-            // Close the database connection
-            dbConnection.closeConnection();
+        if (id2 != null && !id2.isEmpty()) {
+           Patient paty=new Patient();
+           paty.SearchById(id2);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter a valid PatientId.");
         }
 
-        }
-        
-    
+
     }//GEN-LAST:event_search_patientActionPerformed
-    
+
+    private void allPatientsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_allPatientsActionPerformed
+        Patient patient_rec=new  Patient();
+        patient_rec.SearchAllPatients();
+        // Retrieve all patient records from the database
+       
+    }//GEN-LAST:event_allPatientsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -350,16 +337,28 @@ public class ManagePatient extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
-                }
+
+}
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ManagePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ManagePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ManagePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ManagePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ManagePatient.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(ManagePatient.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(ManagePatient.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
+} catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(ManagePatient.class  
+
+.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -373,6 +372,8 @@ public class ManagePatient extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add_patient;
+    private javax.swing.JButton allPatients;
+    private javax.swing.JLabel back_img_label;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton delete_patient;
     private javax.swing.JLabel jLabel1;
@@ -382,7 +383,6 @@ public class ManagePatient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField pat_age;
     private javax.swing.JTextField pat_emerg_no;
     private javax.swing.JTextField pat_gender;
