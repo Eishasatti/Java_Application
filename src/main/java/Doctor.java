@@ -41,31 +41,42 @@ public Doctor(String doc_id,String doc_name,int doc_exp,int doc_room,String doc_
         
 
 }
- public ArrayList<String> getDoctorList() {
-     
-        ArrayList<String> doctorDetail = new ArrayList<>();
-        Database_Connection DBcon=new Database_Connection();
-        Connection con =DBcon.getConnection();
-        try {
-            String query = "SELECT DoctorId,Name FROM doctor"; // Replace with your table and column name
-            PreparedStatement pstmt = con.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
+public ArrayList<ArrayList<String>> getDoctorList() {
+    ArrayList<ArrayList<String>> doctorDetails = new ArrayList<>();
 
-            while (rs.next()) {
-                String doctor = rs.getString("DoctorId") + ": " + rs.getString("Name");
-            doctorDetail.add(doctor);
+    Database_Connection DBcon = new Database_Connection();
+    Connection con = DBcon.getConnection();
+    try {
+        String query = "SELECT DoctorId, Name FROM doctor"; // Replace with your table and column name
+        PreparedStatement pstmt = con.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // Create an inner list for each doctor
+            ArrayList<String> doctor = new ArrayList<>();
+            String doctorId = rs.getString("DoctorId");
+            String doctorName = rs.getString("Name");
+
+            // Add ID first, then Name
+            doctor.add(doctorId);
+            doctor.add(doctorName);
+
+            // Add the inner list to the main list
+            doctorDetails.add(doctor);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Add proper error handling
+    } finally {
+        try {
+            if (con != null) {
+                con.close();
             }
         } catch (SQLException e) {
-        } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-            }
+            e.printStackTrace(); // Add proper error handling
         }
-        return doctorDetail;
     }
+    return doctorDetails;
+}
 
     public void AddToDB(){
         

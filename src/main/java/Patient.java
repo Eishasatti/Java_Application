@@ -248,30 +248,42 @@ public class Patient {
         }
     }
    */
-     public ArrayList<String> getPatientList() {
-        ArrayList<String> PatientDetails = new ArrayList<>();
-        Database_Connection DBcon=new Database_Connection();
-        Connection con =DBcon.getConnection();
-        try {
-            String query = "SELECT PatientId,Name FROM patient"; // Replace with your table and column name
-            PreparedStatement pstmt = con.prepareStatement(query);
-            ResultSet rs = pstmt.executeQuery();
+  public ArrayList<ArrayList<String>> getPatientList() {
+    ArrayList<ArrayList<String>> patientDetails = new ArrayList<>();
 
-            while (rs.next()) {
-                String patient1=rs.getString("PatientId")+":"+rs.getString("Name");
-                PatientDetails.add(patient1);
+    Database_Connection DBcon = new Database_Connection();
+    Connection con = DBcon.getConnection();
+    try {
+        String query = "SELECT PatientId, Name FROM patient"; // Replace with your table and column name
+        PreparedStatement pstmt = con.prepareStatement(query);
+        ResultSet rs = pstmt.executeQuery();
+
+        while (rs.next()) {
+            // Create an inner list for each patient
+            ArrayList<String> patient = new ArrayList<>();
+            String patientId = rs.getString("PatientId");
+            String patientName = rs.getString("Name");
+
+            // Add ID first, then Name
+            patient.add(patientId);
+            patient.add(patientName);
+
+            // Add the inner list to the main list
+            patientDetails.add(patient);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace(); // Add proper error handling
+    } finally {
+        try {
+            if (con != null) {
+                con.close();
             }
         } catch (SQLException e) {
-        } finally {
-            try {
-                if (con != null) {
-                    con.close();
-                }
-            } catch (SQLException e) {
-            }
+            e.printStackTrace(); // Add proper error handling
         }
-        return PatientDetails;
     }
+    return patientDetails;
+}
 
     public void DeletefromDb(String pat_id){
         id=pat_id;
