@@ -1,4 +1,7 @@
+package frontendpages;
 
+
+import BackEND.Patient;
 import java.awt.Image;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

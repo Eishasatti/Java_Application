@@ -1,3 +1,5 @@
+package frontendpages;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -7,6 +9,9 @@
  *
  * @author EISHA
  */
+import BackEND.Doctor;
+import BackEND.Receptionist;
+import BackEND.Admin;
 import javax.swing.JOptionPane;
 public class LoginForm extends javax.swing.JFrame {
 

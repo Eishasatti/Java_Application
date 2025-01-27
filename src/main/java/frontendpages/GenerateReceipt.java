@@ -1,3 +1,5 @@
+package frontendpages;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
@@ -7,6 +9,9 @@
  *
  * @author EISHA
  */
+import BackEND.Appointment;
+import BackEND.Doctor;
+import BackEND.ReceiptPrint;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;

@@ -1,3 +1,5 @@
+package BackEND;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -7,6 +9,8 @@
  *
  * @author EISHA
  */
+import frontendpages.DoctorInterface;
+import DatabaseConn.Database_Connection;
 import java.sql.*;
 import java.util.ArrayList;
 import javax.swing.JFrame;

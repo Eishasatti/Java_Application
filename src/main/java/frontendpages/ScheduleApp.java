@@ -1,4 +1,10 @@
+package frontendpages;
 
+
+import BackEND.Appointment;
+import BackEND.Doctor;
+import BackEND.Patient;
+import BackEND.Payment;
 import java.awt.HeadlessException;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;

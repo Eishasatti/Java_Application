@@ -1,3 +1,9 @@
+package BackEND;
+
+import frontendpages.AdminInterface;
+import frontendpages.DoctorInterface;
+import frontendpages.ReceptionistDashBoard;
+import DatabaseConn.Database_Connection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
