@@ -182,7 +182,7 @@ public class Appointment {
 
     try {
         // SQL query to select appointment IDs where payment status is 'Paid'
-        String query = "SELECT AppId FROM payment WHERE PayStatus = 'Paid'";
+        String query = "SELECT AppId FROM payment WHERE PaymentStatus = 'Paid'";
         PreparedStatement pstmt = con.prepareStatement(query);
         ResultSet rs = pstmt.executeQuery();
 
