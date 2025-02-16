@@ -74,6 +74,7 @@ public class Patient {
             dbConnection.closeConnection();
         }
     }
+  
     public void SearchById(String pat_1_id){
         String patient_s_id=pat_1_id;
          Database_Connection dbConnection = new Database_Connection();
@@ -140,6 +141,7 @@ public class Patient {
                 dbConnection.closeConnection();
             }
     }
+  
     public void SearchAllPatients(){
          Database_Connection dbConnection = new Database_Connection();
         Connection conn = dbConnection.getConnection(); // Get the connection
@@ -204,54 +206,8 @@ public class Patient {
         }
 
     }
-  /*
-    public void SearchfromDb(String pat_id){
-        id=pat_id;
-         Database_Connection dbConnection = new Database_Connection();
-        Connection conn = dbConnection.getConnection();  // Get the connection
 
-        // SQL select query to search for a patient by PatientId
-        String searchQuery = "SELECT * FROM patient WHERE PatientId = ?";
-        
-        try (PreparedStatement stmt = conn.prepareStatement(searchQuery)) {
-            // Set the PatientId for the record to search
-            stmt.setString(1, id);  // Assuming `id` is the correct PatientId to search
-            
-            // Execute the search query
-            ResultSet rs = stmt.executeQuery();
-
-            // Check if a record is found
-            if (rs.next()) {
-                // Retrieve data from the result set and populate fields (example)
-                String name = rs.getString("Name");
-                String gender = rs.getString("Gender");
-                String age = rs.getString("Age");
-                String phoneNo = rs.getString("Phoneno");
-                String emgContact = rs.getString("EmgContact");
-
-                // Display or use the data (e.g., in your form fields)
-                JOptionPane.showMessageDialog(null, "Patient found: " + name + ", " + gender + ", " + age);
-//                
-//                // Optionally, you can populate form fields with the retrieved data
-//                // For example: 
-//                // pat_name.setText(name);
-//                // pat_gender.setText(gender);
-//                // pat_age.setText(age);
-//                // pat_phone.setText(phoneNo);
-//                // pat_emerg_no.setText(emgContact);
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "No patient found with that PatientId.");
-            }
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error: Unable to search for patient.");
-            ex.printStackTrace();
-        } finally {
-            // Close the database connection
-            dbConnection.closeConnection();
-        }
-    }
-   */
+  
   public ArrayList<ArrayList<String>> getPatientList() {
     ArrayList<ArrayList<String>> patientDetails = new ArrayList<>();
 

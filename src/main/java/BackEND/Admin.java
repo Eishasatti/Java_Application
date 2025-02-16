@@ -266,7 +266,7 @@ try {
     public void Login(String u_id, String password, String role) {
         Database_Connection dbcon = new Database_Connection();
         try {
-            String query = "SELECT * FROM admin WHERE admin_id = ? AND password = ? AND role = ?";
+            String query = "SELECT * FROM admin WHERE AdminId = ? AND Password = ? AND Role = ?";
             Connection con = dbcon.getConnection();
 
             try (PreparedStatement pstmt = con.prepareStatement(query)) {

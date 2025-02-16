@@ -46,6 +46,7 @@ public class AdminInterface extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        logoutbtn = new javax.swing.JButton();
         back_img_label = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
@@ -87,7 +88,17 @@ public class AdminInterface extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 180, 50));
-        getContentPane().add(back_img_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-7, -3, 550, 330));
+
+        logoutbtn.setBackground(new java.awt.Color(153, 255, 153));
+        logoutbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        logoutbtn.setText("LogOut");
+        logoutbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutbtnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(logoutbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 20, -1, -1));
+        getContentPane().add(back_img_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, 550, 330));
 
         pack();
         setLocationRelativeTo(null);
@@ -112,6 +123,12 @@ public class AdminInterface extends javax.swing.JFrame {
         this.setVisible(false);
         new ManageAdmin().setVisible(true);        
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void logoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbtnActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginForm().setVisible(true);
+    }//GEN-LAST:event_logoutbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,5 +172,6 @@ public class AdminInterface extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton logoutbtn;
     // End of variables declaration//GEN-END:variables
 }

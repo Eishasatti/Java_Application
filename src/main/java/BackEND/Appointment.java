@@ -104,6 +104,7 @@ public class Appointment {
             dbConnection.closeConnection();
         }
     }
+    
     public String getPatientIdByAppointmentId(String appointmentId) {
     String patientId = null;
 

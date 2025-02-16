@@ -60,6 +60,12 @@ public class LoginForm extends javax.swing.JFrame {
         role.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         role.setText("Role");
         getContentPane().add(role, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 191, -1, -1));
+
+        login_user_id.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                login_user_idActionPerformed(evt);
+            }
+        });
         getContentPane().add(login_user_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 140, 30));
 
         login_password.setToolTipText("");
@@ -81,7 +87,7 @@ public class LoginForm extends javax.swing.JFrame {
         });
         getContentPane().add(login, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 140, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/signupimg.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("D:\\4semester\\final-sems-pro-SC\\src\\main\\java\\icon\\signupimg.jpg")); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 300));
 
         pack();
@@ -127,6 +133,10 @@ public class LoginForm extends javax.swing.JFrame {
          }
      
     }//GEN-LAST:event_loginActionPerformed
+
+    private void login_user_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_login_user_idActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_login_user_idActionPerformed
 
     /**
      * @param args the command line arguments

@@ -256,7 +256,7 @@
     <Component class="javax.swing.JLabel" name="back_img_label">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="-3" y="0" width="740" height="370"/>
+          <AbsoluteConstraints x="0" y="0" width="740" height="370"/>
         </Constraint>
       </Constraints>
     </Component>

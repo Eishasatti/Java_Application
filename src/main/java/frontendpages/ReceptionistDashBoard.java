@@ -27,20 +27,15 @@ public class ReceptionistDashBoard extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel2 = new javax.swing.JLabel();
         GenRec = new javax.swing.JButton();
         ManPat = new javax.swing.JButton();
-        RecName = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         SchdApp = new javax.swing.JButton();
+        logoutbtn = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
-        jLabel2.setText("Receptionist DashBoard");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         GenRec.setBackground(new java.awt.Color(255, 255, 204));
         GenRec.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -62,11 +57,6 @@ public class ReceptionistDashBoard extends javax.swing.JFrame {
         });
         getContentPane().add(ManPat, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 230, 190, 70));
 
-        RecName.setFont(new java.awt.Font("Segoe UI", 2, 18)); // NOI18N
-        RecName.setForeground(new java.awt.Color(0, 51, 51));
-        RecName.setText("Receptionist Name");
-        getContentPane().add(RecName, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 26, -1, -1));
-
         jPanel1.setBackground(new java.awt.Color(204, 204, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -80,7 +70,22 @@ public class ReceptionistDashBoard extends javax.swing.JFrame {
         });
         jPanel1.add(SchdApp, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 390, 70));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 340));
+        logoutbtn.setBackground(new java.awt.Color(153, 255, 153));
+        logoutbtn.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        logoutbtn.setText("LogOut");
+        logoutbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutbtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(logoutbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 20, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 153, 153));
+        jLabel2.setText("Receptionist DashBoard");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 50, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -103,6 +108,12 @@ public class ReceptionistDashBoard extends javax.swing.JFrame {
         this.setVisible(false);
         new GenerateReceipt().setVisible(true);
     }//GEN-LAST:event_GenRecActionPerformed
+
+    private void logoutbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutbtnActionPerformed
+this.setVisible(false);
+// TODO add your handling code here:
+new LoginForm().setVisible(true);
+    }//GEN-LAST:event_logoutbtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -145,9 +156,9 @@ public class ReceptionistDashBoard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton GenRec;
     private javax.swing.JButton ManPat;
-    private javax.swing.JLabel RecName;
     private javax.swing.JButton SchdApp;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton logoutbtn;
     // End of variables declaration//GEN-END:variables
 }

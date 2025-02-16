@@ -243,7 +243,7 @@ public class ManagePatient extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, -1, -1));
-        getContentPane().add(back_img_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, 740, 370));
+        getContentPane().add(back_img_label, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 370));
 
         allPatients.setBackground(new java.awt.Color(204, 204, 204));
         allPatients.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N

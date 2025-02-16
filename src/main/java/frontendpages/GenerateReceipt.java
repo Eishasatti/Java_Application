@@ -395,10 +395,7 @@ public void loadPaidAppointmentIds() {
                 y += headerRectHeight;
 
                 // Leave Body Empty for Doctor's Prescription
-                g2d.drawString("Prescription Area:", 10, y);
-                y += yShift + 10;
-                g2d.drawRect(10, y, 200, 100); // Empty space for the doctor to fill prescription manually
-                y += 110;
+              
 
                 // Footer
                 g2d.drawString("--------------------------", 10, y);
